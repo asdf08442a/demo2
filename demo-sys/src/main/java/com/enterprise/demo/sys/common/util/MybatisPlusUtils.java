@@ -9,9 +9,6 @@ import java.io.File;
 
 /**
  * 代码生成
- *
- * @author jinzhengang
- * @create 2018-03-14 10:12
  **/
 public class MybatisPlusUtils {
     public static void main(String[] args) {
@@ -60,7 +57,7 @@ public class MybatisPlusUtils {
         pc.setParent("com.enterprise.demo");
         pc.setXml("sys.dao.xml");
         pc.setMapper("sys.dao");
-        pc.setEntity("sys.entity");
+        pc.setEntity("sys.pojo.entity");
         pc.setServiceImpl("sys.service.impl");
         pc.setService("sys.service");
         pc.setController("sys.controller");

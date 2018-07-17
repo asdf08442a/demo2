@@ -1,7 +1,7 @@
 package com.enterprise.demo.sys.dao;
 
-import com.enterprise.demo.sys.entity.User;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.enterprise.demo.sys.entity.User;
 
 /**
  * <p>
@@ -14,4 +14,6 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 public interface UserMapper extends BaseMapper<User> {
 
     User selectByUsername(String username);
+
+    int updateLastLoginTime(User user);
 }

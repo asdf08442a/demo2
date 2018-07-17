@@ -16,10 +16,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * @author jinzhengang
- * @date 2018-07-16
- **/
 public class MyShiroRealm extends AuthorizingRealm {
 
     @Autowired

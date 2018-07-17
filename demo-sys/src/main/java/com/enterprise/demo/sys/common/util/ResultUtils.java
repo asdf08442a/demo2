@@ -1,51 +1,45 @@
-package com.enterprise.demo.admin.util;
+package com.enterprise.demo.sys.common.util;
 
-import com.enterprise.demo.admin.enums.ExceptionEnum;
-import com.enterprise.demo.api.Result;
+import com.enterprise.demo.sys.common.CoreConst;
+import com.enterprise.demo.sys.dto.base.PageResultDTO;
+import com.enterprise.demo.sys.dto.base.ResponseDTO;
+
+import java.util.List;
 
 /**
  * 返回工具类
- *
- * @author jinzhengang
- * @create 2018-01-25 11:36
- **/
+ */
 public class ResultUtils {
 
-    /**
-     * 返回成功，传入返回体具体出參
-     */
-    public static Result success(Object object) {
-        Result result = new Result();
-        result.setCode(0);
-        result.setMsg("success");
-        result.setData(object);
-        return result;
+    public static ResponseDTO success() {
+        return dto(CoreConst.SUCCESS_CODE, null, null);
     }
 
-    /**
-     * 提供给部分不需要出參的接口
-     */
-    public static Result success() {
-        return success(null);
+    public static ResponseDTO success(String msg) {
+        return dto(CoreConst.SUCCESS_CODE, msg, null);
     }
 
-    /**
-     * 自定义错误信息
-     */
-    public static Result error(Integer code, String msg) {
-        Result result = new Result();
-        result.setCode(code);
-        result.setMsg(msg);
-        return result;
+    public static ResponseDTO success(String msg, Object data) {
+        return dto(CoreConst.SUCCESS_CODE, msg, data);
     }
 
-    /**
-     * 返回异常信息，在已知的范围内
-     */
-    public static Result error(ExceptionEnum exceptionEnum) {
-        Result result = new Result();
-        result.setCode(exceptionEnum.getCode());
-        result.setMsg(exceptionEnum.getMsg());
-        return result;
+    public static ResponseDTO error() {
+        return dto(CoreConst.FAIL_CODE, CoreConst.INTERNAL_ERROR, null);
+    }
+
+    public static ResponseDTO error(String msg) {
+        return dto(CoreConst.FAIL_CODE, msg, null);
+    }
+
+    public static ResponseDTO error(String msg, Object data) {
+        return dto(CoreConst.FAIL_CODE, msg, data);
+    }
+
+    public static PageResultDTO table(List<?> list, Long total) {
+        return new PageResultDTO(list, total);
+    }
+
+    public static ResponseDTO dto(Integer status, String message, Object data) {
+        return new ResponseDTO<>(status, message, data);
     }
 }

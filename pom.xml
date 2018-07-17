@@ -33,6 +33,7 @@
         <shiro-spring.version>1.4.0</shiro-spring.version>
         <shiro-redis.version>3.1.0</shiro-redis.version>
         <commons-lang3.version>3.7</commons-lang3.version>
+        <kaptcha.version>2.3.2</kaptcha.version>
     </properties>
 
     <dependencyManagement>
@@ -96,6 +97,13 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <!-- kaptcha -->
+            <dependency>
+                <groupId>com.github.penggle</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha.version}</version>
             </dependency>
 
         </dependencies>

@@ -27,4 +27,9 @@ public class PermissionServiceImpl implements PermissionService {
     public Set<String> findPermsByUserId(String userId) {
         return permissionMapper.findPermsByUserId(userId);
     }
+
+    @Override
+    public List<Permission> selectMenuByUserId(String userId) {
+        return permissionMapper.selectMenuByUserId(userId);
+    }
 }

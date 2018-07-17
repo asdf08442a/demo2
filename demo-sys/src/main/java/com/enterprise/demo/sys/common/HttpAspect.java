@@ -1,4 +1,4 @@
-package com.enterprise.demo.admin.aop;
+package com.enterprise.demo.sys.common;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -17,9 +17,6 @@ import java.util.UUID;
 
 /**
  * http切面
- *
- * @author jinzhengang
- * @create 2018-01-25 11:48
  **/
 @Slf4j
 @Aspect

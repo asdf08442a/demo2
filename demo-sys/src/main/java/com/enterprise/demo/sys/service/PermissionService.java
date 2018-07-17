@@ -14,4 +14,6 @@ public interface PermissionService {
     List<Permission> selectAll(Integer status);
 
     Set<String> findPermsByUserId(String userId);
+
+    List<Permission> selectMenuByUserId(String userId);
 }

@@ -1,9 +1,8 @@
-package com.enterprise.demo.admin.handle;
+package com.enterprise.demo.sys.common;
 
-import com.enterprise.demo.admin.enums.ExceptionEnum;
-import com.enterprise.demo.admin.exception.BizException;
-import com.enterprise.demo.admin.util.ResultUtils;
-import com.enterprise.demo.api.Result;
+import com.enterprise.demo.sys.common.exception.BizException;
+import com.enterprise.demo.sys.common.util.ResultUtils;
+import com.enterprise.demo.sys.dto.base.ResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,9 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 统一异常处理
- *
- * @author jinzhengang
- * @create 2018-01-25 11:45
  **/
 @Slf4j
 @Component
@@ -26,13 +22,13 @@ public class ExceptionHandle {
      */
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public Result exceptionGet(Exception e) {
+    public ResponseDTO exceptionGet(Exception e) {
         log.error("【系统异常】{}", e);
         if (e instanceof BizException) {
             BizException bizException = (BizException) e;
-            return ResultUtils.error(bizException.getCode(), bizException.getMessage());
+            return ResultUtils.error(bizException.getMessage());
         }
 
-        return ResultUtils.error(ExceptionEnum.UNKNOW_ERROR);
+        return ResultUtils.error();
     }
 }

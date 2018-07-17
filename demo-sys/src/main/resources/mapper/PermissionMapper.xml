@@ -31,12 +31,24 @@
         FROM permission WHERE status=#{status} ORDER BY order_num
     </select>
 
-    <select id="findPermsByUserId" resultType="java.lang.String">
+    <select id="findPermsByUserId" resultType="String">
         SELECT DISTINCT p.perms
         FROM permission p
         LEFT JOIN role_permission rp ON p.permission_id = rp.permission_id
-        LEFT JOIN user_role ur on rp.role_id = ur.role_id
-        WHERE ur.user_id = #{userId} and p.perms !='' and p.status=1
+        LEFT JOIN user_role ur ON rp.role_id = ur.role_id
+        WHERE ur.user_id = #{userId} AND p.perms !='' AND p.status=1
+    </select>
+
+    <select id="selectMenuByUserId" parameterType="String" resultMap="BaseResultMap">
+        SELECT
+        p.id, p.permission_id, p.name, p.description, p.url, p.perms, p.parent_id,
+        p.type, p.order_num, p.icon, p.status, p.gmt_create, p.gmt_modified
+        FROM permission p
+        LEFT JOIN role_permission rp ON p.permission_id = rp.permission_id
+        LEFT JOIN user_role ur ON rp.role_id = ur.role_id
+        WHERE ur.user_id = #{userId}
+        AND p.type IN(0,1) AND p.status=1
+        ORDER BY p.order_num
     </select>
 
 </mapper>

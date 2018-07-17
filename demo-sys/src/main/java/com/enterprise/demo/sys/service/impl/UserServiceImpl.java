@@ -21,4 +21,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectByUsername(username);
     }
 
+    @Override
+    public void updateLastLoginTime(User user) {
+        userMapper.updateLastLoginTime(user);
+    }
+
 }
