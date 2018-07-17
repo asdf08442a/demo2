@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.enterprise.demo.sys.dao.PermissionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.enterprise.demo.sys.entity.Permission">
+        <id column="id" property="id"/>
+        <result column="permission_id" property="permissionId"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="url" property="url"/>
+        <result column="perms" property="perms"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="type" property="type"/>
+        <result column="order_num" property="orderNum"/>
+        <result column="icon" property="icon"/>
+        <result column="status" property="status"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, permission_id AS permissionId, name, description, url, perms, parent_id AS parentId, type,
+        order_num AS orderNum, icon, status, gmt_create AS gmtCreate, gmt_modified AS gmtModified
+    </sql>
+
+    <select id="selectAllPerms" parameterType="integer" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM permission WHERE status=#{status} ORDER BY order_num
+    </select>
+
+    <select id="findPermsByUserId" resultType="java.lang.String">
+        SELECT DISTINCT p.perms
+        FROM permission p
+        LEFT JOIN role_permission rp ON p.permission_id = rp.permission_id
+        LEFT JOIN user_role ur on rp.role_id = ur.role_id
+        WHERE ur.user_id = #{userId} and p.perms !='' and p.status=1
+    </select>
+
+</mapper>

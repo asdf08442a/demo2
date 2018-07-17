@@ -51,7 +51,7 @@ spring:
     from: jinzhengang@qianbao.com
 
 mybatis-plus:
-  mapper-locations: classpath:/com/enterprise/demo/*/dao/xml/*Mapper.xml
+  mapper-locations: classpath:mapper/*Mapper.xml
   typeAliasesPackage: com.enterprise.demo.sys.entity
   global-config:
     #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID"
