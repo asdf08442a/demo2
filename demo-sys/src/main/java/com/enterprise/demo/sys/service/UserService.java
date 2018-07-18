@@ -11,4 +11,8 @@ public interface UserService {
     User selectByUsername(String username);
 
     void updateLastLoginTime(User principal);
+
+    User selectByUserId(String userId);
+
+    int updateByUserId(User user);
 }

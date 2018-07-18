@@ -34,4 +34,18 @@ public class UserServiceImpl implements UserService {
         userMapper.updateLastLoginTime(user);
     }
 
+    @Override
+    public User selectByUserId(String userId) {
+        List<User> users = userMapper.selectList(new EntityWrapper<User>().eq("user_id", userId));
+        if (CollectionUtils.isEmpty(users)) {
+            return null;
+        }
+        return users.get(0);
+    }
+
+    @Override
+    public int updateByUserId(User user) {
+        return userMapper.update(user, new EntityWrapper<User>().eq("user_id", user.getUserId()));
+    }
+
 }

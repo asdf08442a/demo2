@@ -1,5 +1,6 @@
 package com.enterprise.demo.sys.config;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.enterprise.demo.sys.common.CoreConst;
 import com.enterprise.demo.sys.entity.Permission;
 import com.enterprise.demo.sys.service.PermissionService;
@@ -32,6 +33,14 @@ public class ShiroConfig {
     @Bean
     public static LifecycleBeanPostProcessor getLifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
+    }
+
+    /**
+     * ShiroDialect，为了在thymeleaf里使用shiro的标签的bean
+     */
+    @Bean
+    public ShiroDialect shiroDialect() {
+        return new ShiroDialect();
     }
 
     @Bean
