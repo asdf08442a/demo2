@@ -34,9 +34,7 @@
     </select>
 
     <select id="selectMenuByUserId" parameterType="String" resultMap="BaseResultMap">
-        SELECT
-        p.id, p.permission_id, p.name, p.description, p.url, p.perms, p.parent_id,
-        p.type, p.order_num, p.icon, p.status, p.gmt_create, p.gmt_modified
+        SELECT DISTINCT p.id, p.permission_id, p.name, p.description, p.url, p.parent_id, p.icon, p.order_num
         FROM permission p
         LEFT JOIN role_permission rp ON p.permission_id = rp.permission_id
         LEFT JOIN user_role ur ON rp.role_id = ur.role_id

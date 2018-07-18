@@ -61,7 +61,7 @@ $(function(){
             }
             for (var i in childArry) {
                 /**/
-                var childArryChild = GetParentArry(childArry[i].id, arry);
+                var childArryChild = GetParentArry(childArry[i].permissionId, arry);
                 if(childArryChild.length>0){
                     menus += '<li class="treeview"><a href="#"><i class="'+childArry[i].icon+'"></i> <span>'+childArry[i].name+'</span>'
                         +'<span class="pull-right-container">'
@@ -70,7 +70,7 @@ $(function(){
                 }else{
                     menus += '<li><a href="#'+childArry[i].url.substring(1,childArry[i].url.length)+'"><i class="'+childArry[i].icon+'"></i><span>'+childArry[i].name+'</span></a>' ;
                 }
-                GetData(childArry[i].id, arry);
+                GetData(childArry[i].permissionId, arry);
                 menus += '</li>';
             }
             menus += '</ul>';

@@ -44,9 +44,9 @@ INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id
 INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('20303', '编辑', '编辑资源', '/permission/edit', 'permission:edit', '17', '2', '0', '', '1');
 INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('20304', '删除', '删除资源', '/permission/delete', 'permission:delete', '17', '2', '0', '', '1');
 INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('3', '运维管理', '运维管理', '', '', '0', '0', '3', 'fa fa-th-list', '1');
-INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('301', '数据监控', '数据监控', '/database/monitoring', 'database', '22', '1', '1', 'fa fa-circle-o', '1');
+INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('301', '数据监控', '数据监控', '/database/monitoring', 'database', '3', '1', '1', 'fa fa-circle-o', '1');
 INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('4', '系统工具', '系统工具', '', '', '0', '0', '4', 'fa fa-th-list', '1');
-INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('401', '图标工具', '图标工具', '/icons', 'icons', '24', '1', '1', 'fa fa-circle-o', '1');
+INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('401', '图标工具', '图标工具', '/icons', 'icons', '4', '1', '1', 'fa fa-circle-o', '1');
 
 -- ----------------------------
 -- Table structure for `role`
