@@ -13,7 +13,5 @@ import com.enterprise.demo.sys.entity.User;
  */
 public interface UserMapper extends BaseMapper<User> {
 
-    User selectByUsername(String username);
-
     int updateLastLoginTime(User user);
 }

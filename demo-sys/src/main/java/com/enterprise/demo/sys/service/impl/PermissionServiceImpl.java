@@ -1,5 +1,6 @@
 package com.enterprise.demo.sys.service.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.enterprise.demo.sys.dao.PermissionMapper;
 import com.enterprise.demo.sys.entity.Permission;
 import com.enterprise.demo.sys.service.PermissionService;
@@ -20,7 +21,8 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public List<Permission> selectAll(Integer status) {
-        return permissionMapper.selectAllPerms(status);
+        return permissionMapper.selectList(
+                new EntityWrapper<Permission>().eq("status", status).orderBy("order_num"));
     }
 
     @Override

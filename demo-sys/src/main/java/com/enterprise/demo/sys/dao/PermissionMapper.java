@@ -16,8 +16,6 @@ import java.util.Set;
  */
 public interface PermissionMapper extends BaseMapper<Permission> {
 
-    List<Permission> selectAllPerms(Integer status);
-
     Set<String> findPermsByUserId(String userId);
 
     List<Permission> selectMenuByUserId(String userId);

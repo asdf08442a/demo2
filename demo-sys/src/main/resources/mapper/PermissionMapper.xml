@@ -25,12 +25,6 @@
         order_num AS orderNum, icon, status, gmt_create AS gmtCreate, gmt_modified AS gmtModified
     </sql>
 
-    <select id="selectAllPerms" parameterType="integer" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM permission WHERE status=#{status} ORDER BY order_num
-    </select>
-
     <select id="findPermsByUserId" resultType="String">
         SELECT DISTINCT p.perms
         FROM permission p
