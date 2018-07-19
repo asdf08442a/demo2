@@ -41,14 +41,14 @@ spring:
 
   mail:
     host: smtp.exmail.qq.com
-    username: jinzhengang@qianbao.com
-    password: Aiqun618
+    username: 18330068303@139.com
+    password:
     properties:
       mail:
         smtp:
           auth: true
           timeout: 25000
-    from: jinzhengang@qianbao.com
+    from: 18330068303@139.com
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*Mapper.xml
