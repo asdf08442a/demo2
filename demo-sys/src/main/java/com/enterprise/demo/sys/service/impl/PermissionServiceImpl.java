@@ -21,8 +21,9 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public List<Permission> selectAll(Integer status) {
-        return permissionMapper.selectList(
-                new EntityWrapper<Permission>().eq("status", status).orderBy("order_num"));
+        return permissionMapper.selectList(new EntityWrapper<Permission>()
+                .eq("status", status)
+                .orderBy("order_num"));
     }
 
     @Override
@@ -33,5 +34,14 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     public List<Permission> selectMenuByUserId(String userId) {
         return permissionMapper.selectMenuByUserId(userId);
+    }
+
+    @Override
+    public List<Permission> selectAllMenuName(Integer status) {
+        return permissionMapper.selectList(new EntityWrapper<Permission>()
+                .eq("status", status)
+                .in("type", new String[]{"0", "1"})
+                .orderBy("order_num")
+        );
     }
 }
