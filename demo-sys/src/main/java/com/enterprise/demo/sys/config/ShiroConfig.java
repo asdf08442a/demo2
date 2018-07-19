@@ -62,6 +62,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/register", "anon");
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/error/**", "anon");
+        // 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
         filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
@@ -112,17 +113,6 @@ public class ShiroConfig {
     }
 
     /**
-     * cookie对象;
-     */
-    public SimpleCookie rememberMeCookie() {
-        // 这个参数是cookie的名称，对应前端的checkbox的name = rememberMe
-        SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
-        // 记住我cookie生效时间30天 ,单位秒
-        simpleCookie.setMaxAge(2592000);
-        return simpleCookie;
-    }
-
-    /**
      * cookie管理对象;记住我功能
      */
     public CookieRememberMeManager rememberMeManager() {
@@ -131,5 +121,16 @@ public class ShiroConfig {
         // rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度(128 256 512 位)
         cookieRememberMeManager.setCipherKey(Base64.decode("3AvVhmFLUs0KTA3Kprsdag=="));
         return cookieRememberMeManager;
+    }
+
+    /**
+     * cookie对象;
+     */
+    public SimpleCookie rememberMeCookie() {
+        // 这个参数是cookie的名称，对应前端的checkbox的name = rememberMe
+        SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
+        // 记住我cookie生效时间30天 ,单位秒
+        simpleCookie.setMaxAge(2592000);
+        return simpleCookie;
     }
 }
