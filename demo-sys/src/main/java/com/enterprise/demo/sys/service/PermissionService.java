@@ -18,4 +18,16 @@ public interface PermissionService {
     List<Permission> selectMenuByUserId(String userId);
 
     List<Permission> selectAllMenuName(Integer status);
+
+    int insert(Permission permission);
+
+    int selectSubPermsByPermissionId(String permissionId);
+
+    int updateStatus(String permissionId, Integer status);
+
+    Permission findByPermissionId(String permissionId);
+
+    Permission findByParentId(String parentId);
+
+    int updateByPermissionId(Permission permission);
 }

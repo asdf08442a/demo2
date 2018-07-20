@@ -360,12 +360,12 @@
                     if(flag==1){
                         menuCheckedType = node[0].type;
                         //选择上级菜单
-                        $("#parentId").val(node[0].id);
+                        $("#parentId").val(node[0].parentId);
                         $("#parentMenu").val(node[0].name);
                     }else if(flag==2){
                         detailMenuCheckedType=node[0].type;
                         //选择上级菜单
-                        $("#detailParentId").val(node[0].id);
+                        $("#detailParentId").val(node[0].parentId);
                         $("#detailParentMenu").val(node[0].name);
                     }
                     layer.close(index);
