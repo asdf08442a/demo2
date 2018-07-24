@@ -43,4 +43,8 @@
         ORDER BY p.order_num
     </select>
 
+    <update id="updateStatusByPermissionId">
+        UPDATE permission SET status = #{status} WHERE permission_id = #{permissionId}
+    </update>
+
 </mapper>

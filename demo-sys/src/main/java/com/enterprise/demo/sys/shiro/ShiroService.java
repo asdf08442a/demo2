@@ -42,10 +42,10 @@ public class ShiroService {
         for (Permission permission : permissionList) {
             if (StringUtils.isNotBlank(permission.getUrl()) && StringUtils.isNotBlank(permission.getPerms())) {
                 String perm = "perms[" + permission.getPerms() + "]";
-                filterChainDefinitionMap.put(permission.getUrl(), perm + ",kickout");
+                filterChainDefinitionMap.put(permission.getUrl(), perm);
             }
         }
-        filterChainDefinitionMap.put("/**", "user,kickout");
+        filterChainDefinitionMap.put("/**", "user");
         return filterChainDefinitionMap;
     }
 

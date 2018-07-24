@@ -24,7 +24,7 @@ CREATE TABLE `permission` (
 -- ----------------------------
 INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('1', '工作台', '工作台', '/workdest', 'workdest', '0', '1', '1', 'fa fa-home', '1');
 INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('2', '权限管理', '权限管理', '', '', '0', '0', '2', 'fa fa-th-list', '1');
-INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('201', '用户管理', '用户管理', '/users', 'users', '2', '1', '1', 'fa fa-circle-o', '1');
+INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('201', '用户管理', '用户管理', '/users', 'users', '2', '1', '3', 'fa fa-circle-o', '1');
 INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('20101', '列表查询', '用户列表查询', '/user/list', 'user:list', '201', '2', '0', '', '1');
 INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('20102', '新增', '新增用户', '/user/add', 'user:add', '201', '2', '0', '', '1');
 INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('20103', '编辑', '编辑用户', '/user/edit', 'user:edit', '201', '2', '0', '', '1');
@@ -38,7 +38,7 @@ INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id
 INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('20204', '删除', '删除角色', '/role/delete', 'role:delete', '202', '2', '0', '', '1');
 INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('20205', '批量删除', '批量删除角色', '/role/batch/delete', 'role:batchDelete', '202', '2', '0', '', '1');
 INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('20206', '分配权限', '分配权限', '/role/assign/permission', 'role:assignPerms', '202', '2', '0', '', '1');
-INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('203', '资源管理', '资源管理', '/permissions', 'permissions', '2', '1', '3', 'fa fa-circle-o', '1');
+INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('203', '资源管理', '资源管理', '/permissions', 'permissions', '2', '1', '1', 'fa fa-circle-o', '1');
 INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('20301', '列表查询', '资源列表', '/permission/list', 'permission:list', '203', '2', '0', '', '1');
 INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('20302', '新增', '新增资源', '/permission/add', 'permission:add', '203', '2', '0', '', '1');
 INSERT INTO `permission`(permission_id, name, description, url, perms, parent_id, type, order_num, icon, status) VALUES ('20303', '编辑', '编辑资源', '/permission/edit', 'permission:edit', '203', '2', '0', '', '1');

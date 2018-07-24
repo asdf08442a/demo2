@@ -10,10 +10,6 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
-/**
- * @author jinzhengang
- * @date 2018-07-16
- **/
 @Service
 public class UserServiceImpl implements UserService {
 
