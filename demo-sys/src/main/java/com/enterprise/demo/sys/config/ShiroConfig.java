@@ -129,8 +129,8 @@ public class ShiroConfig {
     public SimpleCookie rememberMeCookie() {
         // 这个参数是cookie的名称，对应前端的checkbox的name = rememberMe
         SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
-        // 记住我cookie生效时间30天 ,单位秒
-        simpleCookie.setMaxAge(2592000);
+        // 记住我cookie生效时间1天 ,单位秒
+        simpleCookie.setMaxAge(86400);
         return simpleCookie;
     }
 }

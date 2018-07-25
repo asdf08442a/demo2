@@ -7,7 +7,7 @@ public class PermissionTreeListDTO {
     private Integer id;
     private String permissionId;
     private String name;
-    private Integer parentId;
+    private String parentId;
     private Boolean open = true;
     private Boolean checked = false;
 }

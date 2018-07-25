@@ -2,8 +2,9 @@ package com.enterprise.demo.sys.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.enterprise.demo.sys.entity.Role;
+import org.apache.ibatis.annotations.Param;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +13,5 @@ import java.util.Set;
  */
 public interface RoleMapper extends BaseMapper<Role> {
 
-    Set<String> findRoleByUserId(String userId);
+    int updateStatusBatch(@Param("roleIds") List<String> roleIds, @Param("status") Integer status);
 }

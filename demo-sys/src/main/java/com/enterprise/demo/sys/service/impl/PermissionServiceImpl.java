@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.enterprise.demo.sys.common.CoreConst;
 import com.enterprise.demo.sys.common.util.IdWorker;
 import com.enterprise.demo.sys.dao.PermissionMapper;
+import com.enterprise.demo.sys.dao.RolePermissionMapper;
+import com.enterprise.demo.sys.dao.UserRoleMapper;
 import com.enterprise.demo.sys.entity.Permission;
 import com.enterprise.demo.sys.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,10 @@ import java.util.Set;
 public class PermissionServiceImpl implements PermissionService {
     @Autowired
     private PermissionMapper permissionMapper;
+    @Autowired
+    private UserRoleMapper userRoleMapper;
+    @Autowired
+    private RolePermissionMapper rolePermissionMapper;
 
     @Override
     public List<Permission> selectAll(Integer status) {
@@ -27,12 +33,16 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public Set<String> findPermsByUserId(String userId) {
-        return permissionMapper.findPermsByUserId(userId);
+        Set<String> roleIds = userRoleMapper.findRoleIdByUserId(userId);
+        Set<String> permissionIds = rolePermissionMapper.findPermissionIdsByRoleIds(roleIds);
+        return permissionMapper.findPermsByPermissionIds(permissionIds);
     }
 
     @Override
     public List<Permission> selectMenuByUserId(String userId) {
-        return permissionMapper.selectMenuByUserId(userId);
+        Set<String> roleIds = userRoleMapper.findRoleIdByUserId(userId);
+        Set<String> permissionIds = rolePermissionMapper.findPermissionIdsByRoleIds(roleIds);
+        return permissionMapper.findMenuByPermissionIds(permissionIds);
     }
 
     @Override
@@ -46,7 +56,7 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public int insert(Permission permission) {
-        permission.setPermissionId(String.valueOf(IdWorker.nextId()));
+        permission.setPermissionId(String.valueOf(IdWorker.genPermissionId()));
         permission.setStatus(CoreConst.STATUS_VALID);
         return permissionMapper.insert(permission);
     }

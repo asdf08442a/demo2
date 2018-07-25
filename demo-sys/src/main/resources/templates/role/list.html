@@ -48,23 +48,26 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title">新增角色</h4>
             </div>
             <div class="modal-body">
                 <div>
-                    <form class="form-horizontal" id="roleForm" method = 'post' th:action="@{/role/add}">
+                    <form class="form-horizontal" id="roleForm" method='post' th:action="@{/role/add}">
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="name" class="col-sm-3 control-label">角色名称 :</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="name" id="name" require="必填项"  placeholder="">
+                                    <input type="text" class="form-control" name="name" id="name" require="必填项"
+                                           placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="description" class="col-sm-3 control-label">角色描述 :</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="description" id="description" placeholder="">
+                                    <input type="text" class="form-control" name="description" id="description"
+                                           placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -89,7 +92,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title">角色信息</h4>
             </div>
             <div class="modal-body">
@@ -105,7 +109,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title">分配权限</h4>
             </div>
             <div class="modal-body">
@@ -125,47 +130,47 @@
 <script>
     var editFlag = "[[${@perms.hasPerm('role:edit')}]]";
     var deleteFlag = "[[${@perms.hasPerm('role:delete')}]]";
-    var assignPermsFlag="[[${@perms.hasPerm('role:assignPerms')}]]";
-    var roleId="";
+    var assignPermsFlag = "[[${@perms.hasPerm('role:assignPerms')}]]";
+    var roleId = "";
     var roleIdStr;//批量
-    var columns=[
-        {checkbox: true },
+    var columns = [
+        {checkbox: true},
         {
             field: 'name',
             title: '角色名称',
-            align : "center"
+            align: "center"
         }, {
             field: 'description',
             title: '角色描述',
-            align : "center"
+            align: "center"
         },
         {
-            field: 'createTime',
+            field: 'gmtCreate',
             title: '创建时间',
-            align : "center",
-            formatter:function(value,row, index){
+            align: "center",
+            formatter: function (value, row, index) {
                 return Core.longMsTimeConvertToDateTime(value);
             }
         },
         {
-            field : 'operation',
-            title : '操作',
-            align : "center",
-            formatter : function(value,
+            field: 'operation',
+            title: '操作',
+            align: "center",
+            formatter: function (value,
                                  row, index) {
-                var edit = editFlag=="true"  ?  '<a class="table-btn table-btn-info" href="javascript:void(0)" onclick="editRole('+row.id+')">编辑</a>' : '';
-                var assign = assignPermsFlag=="true"  ? '<a class="table-btn table-btn-info"  href="javascript:void(0)" onclick="assignPermsList('+row.roleId+')">分配权限</a>':'';
-                var del = deleteFlag=="true"  ?  '<a  class="table-btn table-btn-danger" href="javascript:void(0)" onclick="deleteRole('+row.roleId+')">删除</a>' : '';
+                var edit = editFlag == "true" ? '<a class="table-btn table-btn-info" href="javascript:void(0)" onclick="editRole(' + row.roleId + ')">编辑</a>' : '';
+                var assign = assignPermsFlag == "true" ? '<a class="table-btn table-btn-info"  href="javascript:void(0)" onclick="assignPermsList(' + row.roleId + ')">分配权限</a>' : '';
+                var del = deleteFlag == "true" ? '<a  class="table-btn table-btn-danger" href="javascript:void(0)" onclick="deleteRole(' + row.roleId + ')">删除</a>' : '';
                 return edit + assign + del;
             }
         }];
-    var options={
-        id:"#table",
+    var options = {
+        id: "#table",
         url: '/role/list',
-        columns:columns,
+        columns: columns,
         toolbar: '#toolbar',
         showRefresh: true,
-        queryParams : queryParams
+        queryParams: queryParams
     }
     Core.initTable(options);
 
@@ -177,7 +182,7 @@
         data: {
             simpleData: {
                 enable: true,
-                idKey: "id",
+                idKey: "permissionId",
                 pIdKey: "parentId"
             }
         }
@@ -185,88 +190,96 @@
 
     $(function () {
         /*查询*/
-        $("#btn_query").click(function(){
+        $("#btn_query").click(function () {
             Core.refreshTable("#table");
         });
         /*新增*/
-        $("#btn_add").click(function(){
+        $("#btn_add").click(function () {
             Core.clearError("#roleForm");
         });
         //批量删除
-        $("#btn_batch_delete").click(function(){
-            var checkedRows= Core.selectMutiData("#table");
-            if(checkedRows!=false){
-                Core.confirm("确定删除选中的"+checkedRows.length+"条记录？",function () {
-                    roleIdStr="";
+        $("#btn_batch_delete").click(function () {
+            var checkedRows = Core.selectMutiData("#table");
+            if (checkedRows != false) {
+                Core.confirm("确定删除选中的" + checkedRows.length + "条记录？", function () {
+                    roleIdStr = "";
                     $.each(checkedRows, function (i, item) {
-                        roleIdStr+=(item.roleId+",");
+                        roleIdStr += (item.roleId + ",");
                     })
-                    roleIdStr=roleIdStr.substring(0,roleIdStr.length-1);
-                    Core.postAjax("/role/batch/delete",{"roleIdStr":roleIdStr},function(data){
-                        if(data.status==200){
+                    roleIdStr = roleIdStr.substring(0, roleIdStr.length - 1);
+                    Core.postAjax("/role/batch/delete", {"roleIdStr": roleIdStr}, function (data) {
+                        if (data.status == 200) {
                             Core.refreshTable("#table");
                         }
                         layer.msg(data.msg);
-                    },"get")
+                    }, "get")
                 })
             }
         });
         //新增-保存
-        $("#saveRole").click(function(){
-            if(doValidForm(roleForm)){
+        $("#saveRole").click(function () {
+            if (doValidForm(roleForm)) {
                 Core.mask("#saveRole");
-                Core.postAjax("/role/add",$("#roleForm").serialize(),function (data) {
+                Core.postAjax("/role/add", $("#roleForm").serialize(), function (data) {
                     Core.unmask("#saveRole");
-                    if(data.status==200){
+                    if (data.status == 200) {
                         $("#roleModal").modal("hide");
                         $("#roleForm")[0].reset();
                         Core.refreshTable("#table")
                     }
                     layer.msg(data.msg);
                 })
-            };
+            }
+            ;
         });
         /*保存分配*/
         $("#saveAssign").click(function () {
             Core.mask("#saveAssign")
-            var permissionIdStr="";
+            var permissionIdStr = "";
             var treeObj = $.fn.zTree.getZTreeObj("permissionTree");
             var nodes = treeObj.getCheckedNodes(true);
-            for(var i=0;i<nodes.length;i++){
-                if(i==(nodes.length-1)){
-                    permissionIdStr+=nodes[i].permissionId;
-                }else{
-                    permissionIdStr+=nodes[i].permissionId+",";
+            for (var i = 0; i < nodes.length; i++) {
+                if (i == (nodes.length - 1)) {
+                    permissionIdStr += nodes[i].permissionId;
+                } else {
+                    permissionIdStr += nodes[i].permissionId + ",";
                 }
             }
-            Core.postAjax( '/role/assign/permission',{roleId:roleId,permissionIdStr:permissionIdStr},function (data) {
+            Core.postAjax('/role/assign/permission', {
+                roleId: roleId,
+                permissionIdStr: permissionIdStr
+            }, function (data) {
                 Core.unmask("#saveAssign");
-                if(data.status==200){
+                if (data.status == 200) {
                     $("#assignPermissionModal").modal("hide");
                 }
                 layer.msg(data.msg);
             });
         });
     });
+
     //查询参数
     function queryParams(params) {
         var temp = { //这里的键的名字和控制器的变量名必须一致，这边改动，控制器也需要改成一样的
-            limit : params.limit, //页面大小
-            offset : params.offset, //页码
+            limit: params.limit, //页面大小
+            offset: params.offset, //页码
             name: $("#roleName").val(),
             status: $("#status").val()
         };
         return temp;
     }
+
     /*编辑*/
-    function editRole(id) {
-        Core.load("#roleOpenWindow","/role/edit?&id="+id, function(){
+    function editRole(roleId) {
+        Core.load("#roleOpenWindow", "/role/edit?&roleId=" + roleId, function () {
             $("#roleDetailModal").modal("show");
-        },2);
+        }, 2);
     }
+
     /*删除*/
     function deleteRole(id) {
-        Core.confirm("确定删除该角色？",function () {
+        console.log(id);
+        Core.confirm("确定删除该角色？", function () {
             Core.postAjax("/role/delete", {"roleId": id}, function (data) {
                 if (data.status == 200) {
                     Core.refreshTable("#table");
@@ -275,11 +288,12 @@
             }, "get")
         })
     }
+
     /*分配权限-列表查询*/
     function assignPermsList(id) {
-        roleId=id;
-        Core.postAjax("/role/assign/permission/list",{"roleId":roleId},function(data){
-            var zNodes=data;
+        roleId = id;
+        Core.postAjax("/role/assign/permission/list", {"roleId": roleId}, function (data) {
+            var zNodes = data;
             $.fn.zTree.init($("#permissionTree"), treeSetting, zNodes);
             $("#assignPermissionModal").modal("show");
         })

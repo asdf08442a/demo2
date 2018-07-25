@@ -18,9 +18,16 @@
         id, role_id AS roleId, name, description, status, gmt_create AS gmtCreate, gmt_modified AS gmtModified
     </sql>
 
-    <select id="findRoleByUserId" resultType="java.lang.String">
-        SELECT r.role_id FROM role r LEFT JOIN user_role ur ON r.role_id = ur.role_id
-        WHERE ur.user_id = #{userId}
-    </select>
+    <update id="updateStatusBatch">
+        UPDATE
+        role
+        SET
+        status=#{status}
+        where
+        role_id in
+        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
 
 </mapper>

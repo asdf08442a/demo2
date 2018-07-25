@@ -1,20 +1,15 @@
 package com.enterprise.demo.sys.common.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import java.net.SocketException;
-import java.util.Set;
 
 /**
  * Snowflake
  */
-@Component("idWorker")
+@Slf4j
 public class IdWorker {
-
-    private static final Logger log = LoggerFactory.getLogger(IdWorker.class);
 
     private static final long twepoch = 1288834974657L;
     private static final long workerIdBits = 5L;
@@ -32,42 +27,8 @@ public class IdWorker {
     private static long sequence = 0L;
     private static long lastTimestamp = -1L;
 
-    /**
-     * Instantiates a new Id worker.
-     */
-    public IdWorker() {
-        try {
-            String ip = IpUtils.getRealIp();
-            if (StringUtils.isEmpty(ip)) {
-                throw new RuntimeException("IdWorker get ip is empty");
-            }
-            this.workerId = this.datacenterId = Math.abs(ip.hashCode() % 31);
-            log.info(
-                    String.format("ip:%s,workerId:%s,datacenterId；%s", ip, workerId, datacenterId));
-        } catch (SocketException e) {
-            log.error("init error,error:{}", e);
-            throw new RuntimeException("IdWorker init error");
-        }
-    }
-
-    /**
-     * Instantiates a new Id worker.
-     *
-     * @param workerId     the worker id
-     * @param datacenterId the datacenter id
-     */
-    public IdWorker(long workerId, long datacenterId) {
-        if (workerId > maxWorkerId || workerId < 0) {
-            throw new IllegalArgumentException(
-                    String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
-        }
-        if (datacenterId > maxDatacenterId || datacenterId < 0) {
-            throw new IllegalArgumentException(String
-                    .format("datacenter Id can't be greater than %d or less than 0", maxDatacenterId));
-        }
-        this.workerId = workerId;
-        this.datacenterId = datacenterId;
-    }
+    private static IdWorker permissionIdWorker = new IdWorker(0);
+    private static IdWorker roleIdWorker = new IdWorker(1);
 
     /**
      * Next id long.
@@ -96,13 +57,35 @@ public class IdWorker {
                 | (workerId << workerIdShift) | sequence;
     }
 
+    private static IdWorker userIdWorker = new IdWorker(2);
+
+    /**
+     * Instantiates a new Id worker.
+     *
+     * @param workerId the worker id
+     */
+    public IdWorker(long workerId) {
+        try {
+            String ip = IpUtils.getRealIp();
+            if (StringUtils.isEmpty(ip)) {
+                throw new RuntimeException("IdWorker get ip is empty");
+            }
+            this.datacenterId = Math.abs(ip.hashCode() % 31);
+            check(workerId, datacenterId);
+            log.info("ip:{},workerId:{},datacenterId:{}", ip, workerId, datacenterId);
+        } catch (SocketException e) {
+            log.error("init error,error:{}", e);
+            throw new RuntimeException("IdWorker init error");
+        }
+    }
+
     /**
      * Til next millis long.
      *
      * @param lastTimestamp the last timestamp
      * @return the long
      */
-    protected static long tilNextMillis(long lastTimestamp) {
+    private static long tilNextMillis(long lastTimestamp) {
         long timestamp = timeGen();
         while (timestamp <= lastTimestamp) {
             timestamp = timeGen();
@@ -115,53 +98,31 @@ public class IdWorker {
      *
      * @return the long
      */
-    protected static long timeGen() {
+    private static long timeGen() {
         return System.currentTimeMillis();
     }
 
-    /**
-     * The entry point of application.
-     *
-     * @param args the input arguments
-     */
-    public static void main(String[] args) {
-        Thread t1 = new Thread();
-        Thread t2 = new Thread();
-        t1.setDaemon(true);
-        t2.setDaemon(true);
-        t1.start();
-        t2.start();
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    public static long genPermissionId() {
+        return permissionIdWorker.nextId();
+    }
+
+    public static long genRoleId() {
+        return roleIdWorker.nextId();
+    }
+
+    public static long genUserId() {
+        return userIdWorker.nextId();
+    }
+
+    private void check(long workerId, long datacenterId) {
+        if (workerId > maxWorkerId || workerId < 0) {
+            throw new IllegalArgumentException(
+                    String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
+        }
+        if (datacenterId > maxDatacenterId || datacenterId < 0) {
+            throw new IllegalArgumentException(String
+                    .format("datacenter Id can't be greater than %d or less than 0", maxDatacenterId));
         }
     }
 
-    /**
-     * test
-     */
-    static class IdWorkThread implements Runnable {
-        private Set<Long> set;
-
-        /**
-         * Instantiates a new Id work thread.
-         *
-         * @param set the set
-         */
-        public IdWorkThread(Set<Long> set) {
-            this.set = set;
-        }
-
-        @Override
-        public void run() {
-            while (true) {
-                long id = IdWorker.nextId();
-                System.out.println(Thread.currentThread().getName() + ":" + id);
-                if (!set.add(id)) {
-                    System.out.println("duplicate:" + id);
-                }
-            }
-        }
-    }
 }

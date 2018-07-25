@@ -86,7 +86,7 @@ public class SystemController {
         }
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
-            token.setRememberMe(1 == rememberMe);
+            token.setRememberMe(rememberMe != null && 1 == rememberMe);
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
         } catch (LockedAccountException e) {
