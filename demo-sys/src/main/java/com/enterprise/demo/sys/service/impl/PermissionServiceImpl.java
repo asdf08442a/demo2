@@ -33,14 +33,14 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public Set<String> findPermsByUserId(String userId) {
-        Set<String> roleIds = userRoleMapper.findRoleIdByUserId(userId);
+        Set<String> roleIds = userRoleMapper.findRoleIdsByUserId(userId);
         Set<String> permissionIds = rolePermissionMapper.findPermissionIdsByRoleIds(roleIds);
         return permissionMapper.findPermsByPermissionIds(permissionIds);
     }
 
     @Override
     public List<Permission> selectMenuByUserId(String userId) {
-        Set<String> roleIds = userRoleMapper.findRoleIdByUserId(userId);
+        Set<String> roleIds = userRoleMapper.findRoleIdsByUserId(userId);
         Set<String> permissionIds = rolePermissionMapper.findPermissionIdsByRoleIds(roleIds);
         return permissionMapper.findMenuByPermissionIds(permissionIds);
     }

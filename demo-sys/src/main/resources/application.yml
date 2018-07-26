@@ -37,7 +37,10 @@ spring:
 
   redis:
       host: 192.168.196.128
+      port: 6379
       database: 0
+      password: 123456
+      timeout: 2000
 
   mail:
     host: smtp.exmail.qq.com

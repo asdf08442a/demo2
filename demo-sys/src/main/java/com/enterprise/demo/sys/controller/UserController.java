@@ -27,7 +27,7 @@ public class UserController {
     @GetMapping("/edit")
     public String userDetail(Model model, String userId) {
         log.debug("用户id：{}", userId);
-        User user = userService.selectByUserId(userId);
+        User user = userService.findByUserId(userId);
         model.addAttribute("user", user);
         return "user/userDetail";
     }

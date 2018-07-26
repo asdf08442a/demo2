@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public User selectByUsername(String username) {
+    public User findByUsername(String username) {
         List<User> users = userMapper.selectList(new EntityWrapper<User>().eq("username", username));
         if (CollectionUtils.isEmpty(users)) {
             return null;
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User selectByUserId(String userId) {
+    public User findByUserId(String userId) {
         List<User> users = userMapper.selectList(new EntityWrapper<User>().eq("user_id", userId));
         if (CollectionUtils.isEmpty(users)) {
             return null;

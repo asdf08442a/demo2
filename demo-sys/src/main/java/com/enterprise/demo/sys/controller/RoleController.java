@@ -15,13 +15,16 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/role")
@@ -95,7 +98,7 @@ public class RoleController {
      * 编辑角色详情
      */
     @GetMapping("/edit")
-    public String detail(Model model, Integer roleId) {
+    public String detail(Model model, String roleId) {
         Role role = roleService.findByRoleId(roleId);
         model.addAttribute("role", role);
         return "role/detail";
@@ -129,7 +132,7 @@ public class RoleController {
             dto.setName(permission.getName());
             dto.setParentId(permission.getParentId());
             for (Permission hasPermission : hasPermissions) {
-                //有权限则选中
+                // 有权限则选中
                 if (hasPermission.getPermissionId().equals(permission.getPermissionId())) {
                     dto.setChecked(true);
                     break;
@@ -141,26 +144,24 @@ public class RoleController {
     }
 
 
-//    /*分配权限*/
-//    @PostMapping("/assign/permission")
-//    @ResponseBody
-//    public ResponseVo assignRole(String roleId, String permissionIdStr) {
-//        List<String> permissionIdsList = new ArrayList<>();
-//        if (StringUtils.isNotBlank(permissionIdStr)) {
-//            String[] permissionIds = permissionIdStr.split(",");
-//            permissionIdsList = Arrays.asList(permissionIds);
-//        }
-//        ResponseVo responseVo = roleService.addAssignPermission(roleId, permissionIdsList);
-//        /*重新加载角色下所有用户权限*/
-//        List<User> userList = roleService.findByRoleId(roleId);
-//        if (userList.size() > 0) {
-//            List<String> userIds = new ArrayList<>();
-//            for (User user : userList) {
-//                userIds.add(user.getUserId());
-//            }
-//            myShiroRealm.clearAuthorizationByUserId(userIds);
-//        }
-//        return responseVo;
-//    }
+    /**
+     * 分配权限
+     */
+    @PostMapping("/assign/permission")
+    @ResponseBody
+    public ResponseDTO assignRole(String roleId, String permissionIdStr) {
+        List<String> permissionIdsList = Lists.newArrayList();
+        if (StringUtils.isNotBlank(permissionIdStr)) {
+            String[] permissionIds = permissionIdStr.split(",");
+            permissionIdsList = Arrays.asList(permissionIds);
+        }
+        ResponseDTO responseVo = roleService.addAssignPermission(roleId, permissionIdsList);
+        // 重新加载角色下所有用户权限
+        Set<String> userIds = roleService.findUserIdsByRoleId(roleId);
+        if (!CollectionUtils.isEmpty(userIds)) {
+            myShiroRealm.clearAuthorizationByUserId(userIds);
+        }
+        return responseVo;
+    }
 
 }

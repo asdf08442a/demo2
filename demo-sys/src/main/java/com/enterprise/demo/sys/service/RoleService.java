@@ -1,5 +1,6 @@
 package com.enterprise.demo.sys.service;
 
+import com.enterprise.demo.sys.dto.base.ResponseDTO;
 import com.enterprise.demo.sys.entity.Permission;
 import com.enterprise.demo.sys.entity.Role;
 
@@ -16,9 +17,13 @@ public interface RoleService {
 
     int updateStatusBatch(List<String> roleIds, Integer status);
 
-    Role findByRoleId(Integer roleId);
+    Role findByRoleId(String roleId);
 
     int updateByRoleId(Role role);
 
     List<Permission> findPermissionsByRoleId(String roleId);
+
+    ResponseDTO addAssignPermission(String roleId, List<String> permissionIdsList);
+
+    Set<String> findUserIdsByRoleId(String roleId);
 }
