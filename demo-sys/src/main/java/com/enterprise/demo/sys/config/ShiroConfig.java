@@ -1,7 +1,6 @@
 package com.enterprise.demo.sys.config;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
-import com.enterprise.demo.sys.common.CoreConst;
 import com.enterprise.demo.sys.entity.Permission;
 import com.enterprise.demo.sys.service.PermissionService;
 import com.enterprise.demo.sys.shiro.MyShiroRealm;
@@ -94,7 +93,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/favicon.ico", "anon");
         filterChainDefinitionMap.put("/verificationCode", "anon");
         // 自定义加载权限资源关系
-        List<Permission> permissionList = permissionService.selectAll(CoreConst.STATUS_VALID);
+        List<Permission> permissionList = permissionService.selectAll();
         for (Permission permission : permissionList) {
             if (StringUtils.isNotBlank(permission.getUrl()) && StringUtils.isNotBlank(permission.getPerms())) {
                 String perms = "perms[" + permission.getPerms() + "]";

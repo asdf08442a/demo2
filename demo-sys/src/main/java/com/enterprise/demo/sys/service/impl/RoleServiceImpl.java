@@ -36,36 +36,32 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Set<String> findRoleByUserId(String userId) {
-        return userRoleMapper.findRoleIdsByUserId(userId);
+        return userRoleMapper.selectRoleIdsByUserId(userId);
     }
 
     @Override
     public List<Role> selectRoles(String name) {
         if (StringUtils.isNotBlank(name)) {
-            return roleMapper.selectList(new EntityWrapper<Role>()
-                    .eq("status", 1)
-                    .like("name", name));
+            return roleMapper.selectList(new EntityWrapper<Role>().like("name", name));
         }
-        return roleMapper.selectList(new EntityWrapper<Role>()
-                .eq("status", 1));
+        return roleMapper.selectList(new EntityWrapper<>());
     }
 
     @Override
     public int insert(Role role) {
         role.setRoleId(String.valueOf(IdWorker.genRoleId()));
-        role.setStatus(CoreConst.STATUS_VALID);
         return roleMapper.insert(role);
     }
 
     @Override
-    public int updateStatusBatch(List<String> roleIds, Integer status) {
-        return roleMapper.updateStatusBatch(roleIds, status);
+    public int deleteRole(List<String> roleIds) {
+        rolePermissionMapper.delete(new EntityWrapper<RolePermission>().in("role_id", roleIds.toArray()));
+        return roleMapper.delete(new EntityWrapper<Role>().in("role_id", roleIds.toArray()));
     }
 
     @Override
     public Role findByRoleId(String roleId) {
-        List<Role> roles = roleMapper.selectList(new EntityWrapper<Role>()
-                .eq("role_id", roleId));
+        List<Role> roles = roleMapper.selectList(new EntityWrapper<Role>().eq("role_id", roleId));
         if (CollectionUtils.isEmpty(roles)) {
             return null;
         }
@@ -74,13 +70,12 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public int updateByRoleId(Role role) {
-        return roleMapper.update(role, new EntityWrapper<Role>()
-                .eq("role_id", role.getRoleId()));
+        return roleMapper.update(role, new EntityWrapper<Role>().eq("role_id", role.getRoleId()));
     }
 
     @Override
     public List<Permission> findPermissionsByRoleId(String roleId) {
-        Set<String> permissonIds = rolePermissionMapper.findPermissionIdsByRoleId(roleId);
+        Set<String> permissonIds = rolePermissionMapper.selectPermissionIdsByRoleId(roleId);
         if (CollectionUtils.isEmpty(permissonIds)) {
             return Lists.newArrayList();
         }
@@ -91,8 +86,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public ResponseDTO addAssignPermission(String roleId, List<String> permissionIdsList) {
-        rolePermissionMapper.delete(new EntityWrapper<RolePermission>()
-                .eq("role_id", roleId));
+        rolePermissionMapper.delete(new EntityWrapper<RolePermission>().eq("role_id", roleId));
         for (String permissionId : permissionIdsList) {
             RolePermission rolePermission = new RolePermission();
             rolePermission.setRoleId(roleId);
@@ -104,7 +98,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Set<String> findUserIdsByRoleId(String roleId) {
-        return userRoleMapper.findUserIdsByRoleId(roleId);
+        return userRoleMapper.selectUserIdsByRoleId(roleId);
     }
 
 }

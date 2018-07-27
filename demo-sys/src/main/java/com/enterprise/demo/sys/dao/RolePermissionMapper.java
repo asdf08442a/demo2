@@ -13,7 +13,7 @@ import java.util.Set;
  */
 public interface RolePermissionMapper extends BaseMapper<RolePermission> {
 
-    Set<String> findPermissionIdsByRoleId(@Param("roleId") String roleId);
+    Set<String> selectPermissionIdsByRoleId(@Param("roleId") String roleId);
 
-    Set<String> findPermissionIdsByRoleIds(@Param("roleIds") Set<String> roleIds);
+    Set<String> selectPermissionIdsByRoleIds(@Param("roleIds") Set<String> roleIds);
 }

@@ -8,26 +8,13 @@
         <result column="role_id" property="roleId"/>
         <result column="name" property="name"/>
         <result column="description" property="description"/>
-        <result column="status" property="status"/>
         <result column="gmt_create" property="gmtCreate"/>
         <result column="gmt_modified" property="gmtModified"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, role_id AS roleId, name, description, status, gmt_create AS gmtCreate, gmt_modified AS gmtModified
+        id, role_id AS roleId, name, description, gmt_create AS gmtCreate, gmt_modified AS gmtModified
     </sql>
-
-    <update id="updateStatusBatch">
-        UPDATE
-        role
-        SET
-        status=#{status}
-        where
-        role_id in
-        <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
-            #{item}
-        </foreach>
-    </update>
 
 </mapper>

@@ -34,10 +34,6 @@ public class Role implements Serializable {
      */
     private String description;
     /**
-     * 状态：1有效；2删除
-     */
-    private Integer status;
-    /**
      * 创建时间
      */
     @TableField("gmt_create")

@@ -13,7 +13,7 @@ import java.util.Set;
  */
 public interface UserRoleMapper extends BaseMapper<UserRole> {
 
-    Set<String> findRoleIdsByUserId(@Param("userId") String userId);
+    Set<String> selectRoleIdsByUserId(@Param("userId") String userId);
 
-    Set<String> findUserIdsByRoleId(@Param("userId") String userId);
+    Set<String> selectUserIdsByRoleId(@Param("roleId") String roleId);
 }

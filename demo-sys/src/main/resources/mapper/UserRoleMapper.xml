@@ -16,11 +16,11 @@
         id, user_id AS userId, role_id AS roleId, gmt_create AS gmtCreate, gmt_modified AS gmtModified
     </sql>
 
-    <select id="findRoleIdsByUserId" resultType="java.lang.String">
+    <select id="selectRoleIdsByUserId" resultType="java.lang.String">
         SELECT role_id FROM user_role WHERE user_id = #{userId}
     </select>
 
-    <select id="findUserIdsByRoleId" resultType="java.lang.String">
+    <select id="selectUserIdsByRoleId" resultType="java.lang.String">
         SELECT user_id FROM user_role WHERE role_id = #{roleId}
     </select>
 

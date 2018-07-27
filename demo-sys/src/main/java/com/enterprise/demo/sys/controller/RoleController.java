@@ -1,6 +1,5 @@
 package com.enterprise.demo.sys.controller;
 
-import com.enterprise.demo.sys.common.CoreConst;
 import com.enterprise.demo.sys.common.util.PageUtils;
 import com.enterprise.demo.sys.common.util.ResultUtils;
 import com.enterprise.demo.sys.dto.PermissionTreeListDTO;
@@ -10,6 +9,7 @@ import com.enterprise.demo.sys.entity.Permission;
 import com.enterprise.demo.sys.entity.Role;
 import com.enterprise.demo.sys.service.PermissionService;
 import com.enterprise.demo.sys.service.RoleService;
+import com.enterprise.demo.sys.service.UserService;
 import com.enterprise.demo.sys.shiro.MyShiroRealm;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -32,6 +32,8 @@ import java.util.Set;
 public class RoleController {
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private UserService userService;
     @Autowired
     private PermissionService permissionService;
     @Autowired
@@ -69,8 +71,12 @@ public class RoleController {
     @GetMapping("/delete")
     @ResponseBody
     public ResponseDTO deleteRole(String roleId) {
-        List<String> roleIdsList = Arrays.asList(roleId);
-        int a = roleService.updateStatusBatch(roleIdsList, CoreConst.STATUS_INVALID);
+        int roleUserCnt = userService.selectRoleUserCnt(roleId);
+        if (roleUserCnt > 0) {
+            return ResultUtils.error("该角色下还有用户，无法删除！");
+        }
+        List<String> roleIds = Arrays.asList(roleId);
+        int a = roleService.deleteRole(roleIds);
         if (a > 0) {
             return ResultUtils.success("删除角色成功");
         } else {
@@ -86,7 +92,7 @@ public class RoleController {
     public ResponseDTO batchDeleteRole(String roleIdStr) {
         String[] roleIds = roleIdStr.split(",");
         List<String> roleIdsList = Arrays.asList(roleIds);
-        int a = roleService.updateStatusBatch(roleIdsList, CoreConst.STATUS_INVALID);
+        int a = roleService.deleteRole(roleIdsList);
         if (a > 0) {
             return ResultUtils.success("删除角色成功");
         } else {
@@ -118,12 +124,14 @@ public class RoleController {
         }
     }
 
-    /*分配权限列表查询*/
+    /**
+     * 分配权限列表查询
+     */
     @PostMapping("/assign/permission/list")
     @ResponseBody
     public List<PermissionTreeListDTO> assignRole(String roleId) {
         List<PermissionTreeListDTO> listDTOS = Lists.newArrayList();
-        List<Permission> allPermissions = permissionService.selectAll(CoreConst.STATUS_VALID);
+        List<Permission> allPermissions = permissionService.selectAll();
         List<Permission> hasPermissions = roleService.findPermissionsByRoleId(roleId);
         for (Permission permission : allPermissions) {
             PermissionTreeListDTO dto = new PermissionTreeListDTO();

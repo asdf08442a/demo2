@@ -15,7 +15,7 @@ public interface RoleService {
 
     int insert(Role role);
 
-    int updateStatusBatch(List<String> roleIds, Integer status);
+    int deleteRole(List<String> roleIds);
 
     Role findByRoleId(String roleId);
 

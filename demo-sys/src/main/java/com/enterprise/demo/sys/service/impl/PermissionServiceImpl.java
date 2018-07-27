@@ -1,12 +1,12 @@
 package com.enterprise.demo.sys.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.enterprise.demo.sys.common.CoreConst;
 import com.enterprise.demo.sys.common.util.IdWorker;
 import com.enterprise.demo.sys.dao.PermissionMapper;
 import com.enterprise.demo.sys.dao.RolePermissionMapper;
 import com.enterprise.demo.sys.dao.UserRoleMapper;
 import com.enterprise.demo.sys.entity.Permission;
+import com.enterprise.demo.sys.entity.RolePermission;
 import com.enterprise.demo.sys.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,30 +25,27 @@ public class PermissionServiceImpl implements PermissionService {
     private RolePermissionMapper rolePermissionMapper;
 
     @Override
-    public List<Permission> selectAll(Integer status) {
-        return permissionMapper.selectList(new EntityWrapper<Permission>()
-                .eq("status", status)
-                .orderBy("order_num"));
+    public List<Permission> selectAll() {
+        return permissionMapper.selectList(new EntityWrapper<Permission>().orderBy("order_num"));
     }
 
     @Override
-    public Set<String> findPermsByUserId(String userId) {
-        Set<String> roleIds = userRoleMapper.findRoleIdsByUserId(userId);
-        Set<String> permissionIds = rolePermissionMapper.findPermissionIdsByRoleIds(roleIds);
-        return permissionMapper.findPermsByPermissionIds(permissionIds);
+    public Set<String> selectPermsByUserId(String userId) {
+        Set<String> roleIds = userRoleMapper.selectRoleIdsByUserId(userId);
+        Set<String> permissionIds = rolePermissionMapper.selectPermissionIdsByRoleIds(roleIds);
+        return permissionMapper.selectPermsByPermissionIds(permissionIds);
     }
 
     @Override
     public List<Permission> selectMenuByUserId(String userId) {
-        Set<String> roleIds = userRoleMapper.findRoleIdsByUserId(userId);
-        Set<String> permissionIds = rolePermissionMapper.findPermissionIdsByRoleIds(roleIds);
-        return permissionMapper.findMenuByPermissionIds(permissionIds);
+        Set<String> roleIds = userRoleMapper.selectRoleIdsByUserId(userId);
+        Set<String> permissionIds = rolePermissionMapper.selectPermissionIdsByRoleIds(roleIds);
+        return permissionMapper.selectMenuByPermissionIds(permissionIds);
     }
 
     @Override
-    public List<Permission> selectAllMenuName(Integer status) {
+    public List<Permission> selectAllMenuName() {
         return permissionMapper.selectList(new EntityWrapper<Permission>()
-                .eq("status", status)
                 .in("type", new String[]{"0", "1"})
                 .orderBy("order_num")
         );
@@ -57,23 +54,22 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     public int insert(Permission permission) {
         permission.setPermissionId(String.valueOf(IdWorker.genPermissionId()));
-        permission.setStatus(CoreConst.STATUS_VALID);
         return permissionMapper.insert(permission);
     }
 
     @Override
     public int selectSubPermsByPermissionId(String permissionId) {
-        return permissionMapper.selectCount(new EntityWrapper<Permission>()
-                .eq("parent_id", permissionId));
+        return permissionMapper.selectCount(new EntityWrapper<Permission>().eq("parent_id", permissionId));
     }
 
     @Override
-    public int updateStatus(String permissionId, Integer status) {
-        return permissionMapper.updateStatusByPermissionId(permissionId, status);
+    public int deletePermission(String permissionId) {
+        rolePermissionMapper.delete(new EntityWrapper<RolePermission>().eq("permission_id", permissionId));
+        return permissionMapper.delete(new EntityWrapper<Permission>().eq("permission_id", permissionId));
     }
 
     @Override
-    public Permission findByPermissionId(String permissionId) {
+    public Permission selectByPermissionId(String permissionId) {
         List<Permission> permissions = permissionMapper.selectList(new EntityWrapper<Permission>()
                 .eq("permission_id", permissionId));
         if (CollectionUtils.isEmpty(permissions)) {
@@ -83,7 +79,7 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
-    public Permission findByParentId(String parentId) {
+    public Permission selectByParentId(String parentId) {
         List<Permission> permissions = permissionMapper.selectList(new EntityWrapper<Permission>()
                 .eq("parent_id", parentId));
         if (CollectionUtils.isEmpty(permissions)) {

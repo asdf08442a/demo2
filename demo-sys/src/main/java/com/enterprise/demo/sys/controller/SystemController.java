@@ -111,4 +111,45 @@ public class SystemController {
                 ((User) SecurityUtils.getSubject().getPrincipal()).getUserId());
         return permissionListList;
     }
+
+    /**
+     * 注册
+     */
+    @GetMapping(value = "/register")
+    public String register() {
+        return "system/register";
+    }
+
+    /**
+     * 提交注册
+     */
+    @PostMapping("/register")
+    @ResponseBody
+    public ResponseDTO register(HttpServletRequest request, User registerUser, String confirmPassword, String
+            verification) {
+        // 判断验证码
+        String rightCode = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        if (StringUtils.isBlank(verification) || StringUtils.isBlank(rightCode) || !verification.equals
+                (rightCode)) {
+            return ResultUtils.error("验证码错误！");
+        }
+        String username = registerUser.getUsername();
+        User user = userService.selectByUsername(username);
+        if (user != null) {
+            return ResultUtils.error("用户名已存在！");
+        }
+        String password = registerUser.getPassword();
+        // 判断两次输入密码是否相等
+        if (StringUtils.isBlank(confirmPassword) || StringUtils.isBlank(password) || !confirmPassword.equals
+                (password)) {
+            return ResultUtils.error("两次密码不一致！");
+        }
+        // 注册
+        int registerResult = userService.insert(registerUser);
+        if (registerResult > 0) {
+            return ResultUtils.success("注册成功！");
+        } else {
+            return ResultUtils.error("注册失败，请稍后再试！");
+        }
+    }
 }

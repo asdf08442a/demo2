@@ -1,6 +1,5 @@
 package com.enterprise.demo.sys.shiro;
 
-import com.enterprise.demo.sys.common.CoreConst;
 import com.enterprise.demo.sys.entity.Permission;
 import com.enterprise.demo.sys.service.PermissionService;
 import org.apache.commons.lang3.StringUtils;
@@ -38,7 +37,7 @@ public class ShiroService {
         filterChainDefinitionMap.put("/libs/**", "anon");
         filterChainDefinitionMap.put("/favicon.ico", "anon");
         filterChainDefinitionMap.put("/verificationCode", "anon");
-        List<Permission> permissionList = permissionService.selectAll(CoreConst.STATUS_VALID);
+        List<Permission> permissionList = permissionService.selectAll();
         for (Permission permission : permissionList) {
             if (StringUtils.isNotBlank(permission.getUrl()) && StringUtils.isNotBlank(permission.getPerms())) {
                 String perm = "perms[" + permission.getPerms() + "]";

@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Slf4j
 @Controller
 @RequestMapping("/permission")
+@Slf4j
 public class PermissionController {
     /**
      * 1:全部资源，2：菜单资源
@@ -30,25 +30,10 @@ public class PermissionController {
     private ShiroService shiroService;
 
     /**
-     * 权限列表数据
-     */
-    @PostMapping("/list")
-    @ResponseBody
-    public List<Permission> loadPermissions(String flag) {
-        List<Permission> permissionListList = Lists.newArrayList();
-        if (StringUtils.isBlank(flag) || MENU_FLAG[0].equals(flag)) {
-            permissionListList = permissionService.selectAll(CoreConst.STATUS_VALID);
-        } else if (MENU_FLAG[1].equals(flag)) {
-            permissionListList = permissionService.selectAllMenuName(CoreConst.STATUS_VALID);
-        }
-        return permissionListList;
-    }
-
-    /**
      * 添加权限
      */
-    @ResponseBody
     @PostMapping("/add")
+    @ResponseBody
     public ResponseDTO addPermission(Permission permission) {
         try {
             int a = permissionService.insert(permission);
@@ -67,15 +52,15 @@ public class PermissionController {
     /**
      * 删除权限
      */
-    @ResponseBody
     @PostMapping("/delete")
+    @ResponseBody
     public ResponseDTO deletePermission(String permissionId) {
         try {
             int subPermsByPermissionIdCount = permissionService.selectSubPermsByPermissionId(permissionId);
             if (subPermsByPermissionIdCount > 0) {
                 return ResultUtils.error("该资源存在下级资源，无法删除！");
             }
-            int a = permissionService.updateStatus(permissionId, CoreConst.STATUS_INVALID);
+            int a = permissionService.deletePermission(permissionId);
             if (a > 0) {
                 shiroService.updatePermission();
                 return ResultUtils.success("删除权限成功");
@@ -89,16 +74,31 @@ public class PermissionController {
     }
 
     /**
+     * 权限列表数据
+     */
+    @PostMapping("/list")
+    @ResponseBody
+    public List<Permission> loadPermissions(String flag) {
+        List<Permission> permissionListList = Lists.newArrayList();
+        if (StringUtils.isBlank(flag) || MENU_FLAG[0].equals(flag)) {
+            permissionListList = permissionService.selectAll();
+        } else if (MENU_FLAG[1].equals(flag)) {
+            permissionListList = permissionService.selectAllMenuName();
+        }
+        return permissionListList;
+    }
+
+    /**
      * 权限详情
      */
     @GetMapping("/edit")
     public String detail(Model model, String permissionId) {
-        Permission permission = permissionService.findByPermissionId(permissionId);
+        Permission permission = permissionService.selectByPermissionId(permissionId);
         if (null != permission) {
             if (permission.getParentId().equals(CoreConst.TOP_MENU_ID)) {
                 model.addAttribute("parentName", CoreConst.TOP_MENU_NAME);
             } else {
-                Permission parent = permissionService.findByParentId(permission.getParentId());
+                Permission parent = permissionService.selectByParentId(permission.getParentId());
                 model.addAttribute("parentName", parent.getName());
             }
         }
@@ -106,9 +106,11 @@ public class PermissionController {
         return "permission/detail";
     }
 
-    /*编辑权限*/
-    @ResponseBody
+    /**
+     * 编辑权限
+     */
     @PostMapping("/edit")
+    @ResponseBody
     public ResponseDTO editPermission(@ModelAttribute("permission") Permission permission) {
         int a = permissionService.updateByPermissionId(permission);
         if (a > 0) {

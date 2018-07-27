@@ -7,23 +7,23 @@ import java.util.Set;
 
 public interface PermissionService {
 
-    List<Permission> selectAll(Integer status);
+    List<Permission> selectAll();
 
-    Set<String> findPermsByUserId(String userId);
+    Set<String> selectPermsByUserId(String userId);
 
     List<Permission> selectMenuByUserId(String userId);
 
-    List<Permission> selectAllMenuName(Integer status);
+    List<Permission> selectAllMenuName();
 
     int insert(Permission permission);
 
     int selectSubPermsByPermissionId(String permissionId);
 
-    int updateStatus(String permissionId, Integer status);
+    int deletePermission(String permissionId);
 
-    Permission findByPermissionId(String permissionId);
+    Permission selectByPermissionId(String permissionId);
 
-    Permission findByParentId(String parentId);
+    Permission selectByParentId(String parentId);
 
     int updateByPermissionId(Permission permission);
 }

@@ -16,11 +16,11 @@
         id, role_id AS roleId, permission_id AS permissionId, gmt_create AS gmtCreate, gmt_modified AS gmtModified
     </sql>
 
-    <select id="findPermissionIdsByRoleId" resultType="java.lang.String">
+    <select id="selectPermissionIdsByRoleId" resultType="java.lang.String">
         SELECT permission_id FROM role_permission WHERE role_id=#{roleId}
     </select>
 
-    <select id="findPermissionIdsByRoleIds" resultType="java.lang.String">
+    <select id="selectPermissionIdsByRoleIds" resultType="java.lang.String">
         SELECT permission_id
         FROM role_permission
         WHERE
