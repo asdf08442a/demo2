@@ -50,4 +50,12 @@ public class RenderController {
     public String permissionList() {
         return "permission/list";
     }
+
+    /**
+     * 数据监控入口
+     */
+    @GetMapping(value = "/database/monitoring")
+    public String databaseMonitoring() {
+        return "database/monitoring";
+    }
 }

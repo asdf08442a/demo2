@@ -159,7 +159,8 @@ CREATE TABLE `user` (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user`(user_id, username, password, salt, email, phone, sex, age, status)
-VALUES ('1', 'admin', '872359cc44c637cc73b7cd55c06d95e4', '8cd50474d2a3c1e88298e91df8bf6f1c', '523179414@qq.com', '187888899991', '1', '20', '1');
+VALUES ('1', 'admin', '32977780445491bcb6a827c1abd49381', '286ccf9534de3d4f5eca56377f686c4f', '523179414@qq.com',
+        '187888899991', '1', '20', '1');
 
 -- ----------------------------
 -- Table structure for `user_role`

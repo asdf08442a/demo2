@@ -31,8 +31,8 @@ spring:
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       stat-view-servlet.url-pattern: /druid/*
       stat-view-servlet.reset-enable: false
-      stat-view-servlet.login-username: admin
-      stat-view-servlet.login-password: admin123
+      stat-view-servlet.login-username:
+      stat-view-servlet.login-password:
       aop-patterns: com.enterprise.demo.*.service.*
 
   redis:
