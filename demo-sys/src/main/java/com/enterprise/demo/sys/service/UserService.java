@@ -1,5 +1,6 @@
 package com.enterprise.demo.sys.service;
 
+import com.enterprise.demo.sys.dto.UserOnlineDTO;
 import com.enterprise.demo.sys.dto.base.ResponseDTO;
 import com.enterprise.demo.sys.entity.User;
 
@@ -24,4 +25,8 @@ public interface UserService {
     int updateStatusBatch(List<String> userIdsList, Integer status);
 
     ResponseDTO addAssignRole(String userId, List<String> roleIds);
+
+    List<UserOnlineDTO> selectOnlineUsers(UserOnlineDTO user);
+
+    void kickout(String sessionId, String username);
 }

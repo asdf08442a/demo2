@@ -25,20 +25,18 @@ INSERT INTO `permission` (permission_id, name, description, url, perms, parent_i
 VALUES ('1', '工作台', '工作台', '/workdest', 'workdest', '0', '1', '1', 'fa fa-home');
 INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
 VALUES ('2', '权限管理', '权限管理', '', '', '0', '0', '2', 'fa fa-th-list');
+
 INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
-VALUES ('201', '用户管理', '用户管理', '/users', 'users', '2', '1', '3', 'fa fa-circle-o');
+VALUES ('201', '资源管理', '资源管理', '/permissions', 'permissions', '2', '1', '1', 'fa fa-circle-o');
 INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
-VALUES ('20101', '列表查询', '用户列表查询', '/user/list', 'user:list', '201', '2', '0', '');
+VALUES ('20101', '列表查询', '资源列表', '/permission/list', 'permission:list', '203', '2', '0', '');
 INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
-VALUES ('20102', '新增', '新增用户', '/user/add', 'user:add', '201', '2', '0', '');
+VALUES ('20102', '新增', '新增资源', '/permission/add', 'permission:add', '203', '2', '0', '');
 INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
-VALUES ('20103', '编辑', '编辑用户', '/user/edit', 'user:edit', '201', '2', '0', '');
+VALUES ('20103', '编辑', '编辑资源', '/permission/edit', 'permission:edit', '203', '2', '0', '');
 INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
-VALUES ('20104', '删除', '删除用户', '/user/delete', 'user:delete', '201', '2', '0', '');
-INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
-VALUES ('20105', '批量删除', '批量删除用户', '/user/batch/delete', 'user:batchDelete', '201', '2', '0', '');
-INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
-VALUES ('20106', '分配角色', '分配角色', '/user/assign/role', 'user:assignRole', '201', '2', '0', '');
+VALUES ('20104', '删除', '删除资源', '/permission/delete', 'permission:delete', '203', '2', '0', '');
+
 INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
 VALUES ('202', '角色管理', '角色管理', '/roles', 'roles', '2', '1', '2', 'fa fa-circle-o');
 INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
@@ -53,16 +51,31 @@ INSERT INTO `permission` (permission_id, name, description, url, perms, parent_i
 VALUES ('20205', '批量删除', '批量删除角色', '/role/batch/delete', 'role:batchDelete', '202', '2', '0', '');
 INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
 VALUES ('20206', '分配权限', '分配权限', '/role/assign/permission', 'role:assignPerms', '202', '2', '0', '');
+
 INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
-VALUES ('203', '资源管理', '资源管理', '/permissions', 'permissions', '2', '1', '1', 'fa fa-circle-o');
+VALUES ('203', '用户管理', '用户管理', '/users', 'users', '2', '1', '3', 'fa fa-circle-o');
 INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
-VALUES ('20301', '列表查询', '资源列表', '/permission/list', 'permission:list', '203', '2', '0', '');
+VALUES ('20301', '列表查询', '用户列表查询', '/user/list', 'user:list', '201', '2', '0', '');
 INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
-VALUES ('20302', '新增', '新增资源', '/permission/add', 'permission:add', '203', '2', '0', '');
+VALUES ('20302', '新增', '新增用户', '/user/add', 'user:add', '201', '2', '0', '');
 INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
-VALUES ('20303', '编辑', '编辑资源', '/permission/edit', 'permission:edit', '203', '2', '0', '');
+VALUES ('20303', '编辑', '编辑用户', '/user/edit', 'user:edit', '201', '2', '0', '');
 INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
-VALUES ('20304', '删除', '删除资源', '/permission/delete', 'permission:delete', '203', '2', '0', '');
+VALUES ('20304', '删除', '删除用户', '/user/delete', 'user:delete', '201', '2', '0', '');
+INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
+VALUES ('20305', '批量删除', '批量删除用户', '/user/batch/delete', 'user:batchDelete', '201', '2', '0', '');
+INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
+VALUES ('20306', '分配角色', '分配角色', '/user/assign/role', 'user:assignRole', '201', '2', '0', '');
+
+INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
+VALUES ('204', '在线用户', '在线用户', '/online/users', 'onlineUsers', '2', '1', '4', 'fa fa-circle-o');
+INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
+VALUES ('20401', '在线用户查询', '在线用户查询', '/online/user/list', 'onlineUser:list', '204', '2', '0', '');
+INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
+VALUES ('20402', '踢出用户', '踢出用户', '/online/user/kickout', 'onlineUser:kickout', '204', '2', '0', '');
+INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
+VALUES ('20403', '批量踢出', '批量踢出', '/online/user/batch/kickout', 'onlineUser:batchKickout', '204', '2', '0', '');
+
 INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
 VALUES ('3', '运维管理', '运维管理', '', '', '0', '0', '3', 'fa fa-th-list');
 INSERT INTO `permission` (permission_id, name, description, url, perms, parent_id, type, order_num, icon)
@@ -115,8 +128,6 @@ INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '20101');
 INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '20102');
 INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '20103');
 INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '20104');
-INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '20105');
-INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '20106');
 INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '202');
 INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '20201');
 INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '20202');
@@ -129,6 +140,12 @@ INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '20301');
 INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '20302');
 INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '20303');
 INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '20304');
+INSERT INTO `role_permission` (role_id, permission_id) VALUES ('1', '20305');
+INSERT INTO `role_permission` (role_id, permission_id) VALUES ('1', '20306');
+INSERT INTO `role_permission` (role_id, permission_id) VALUES ('1', '204');
+INSERT INTO `role_permission` (role_id, permission_id) VALUES ('1', '20401');
+INSERT INTO `role_permission` (role_id, permission_id) VALUES ('1', '20402');
+INSERT INTO `role_permission` (role_id, permission_id) VALUES ('1', '20403');
 INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '3');
 INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '301');
 INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '4');

@@ -8,15 +8,29 @@ import com.enterprise.demo.sys.common.util.PasswordHelper;
 import com.enterprise.demo.sys.common.util.ResultUtils;
 import com.enterprise.demo.sys.dao.UserMapper;
 import com.enterprise.demo.sys.dao.UserRoleMapper;
+import com.enterprise.demo.sys.dto.UserOnlineDTO;
 import com.enterprise.demo.sys.dto.base.ResponseDTO;
 import com.enterprise.demo.sys.entity.User;
 import com.enterprise.demo.sys.entity.UserRole;
 import com.enterprise.demo.sys.service.UserService;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.cache.Cache;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.session.mgt.DefaultSessionKey;
+import org.apache.shiro.session.mgt.SessionManager;
+import org.apache.shiro.subject.SimplePrincipalCollection;
+import org.apache.shiro.subject.support.DefaultSubjectContext;
+import org.crazycake.shiro.RedisCacheManager;
+import org.crazycake.shiro.RedisSessionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Deque;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -26,6 +40,12 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
     @Autowired
     private UserRoleMapper userRoleMapper;
+    @Autowired
+    private RedisSessionDAO redisSessionDAO;
+    @Autowired
+    private SessionManager sessionManager;
+    @Autowired
+    private RedisCacheManager redisCacheManager;
 
     @Override
     public int selectRoleUserCnt(String roleId) {
@@ -102,6 +122,76 @@ public class UserServiceImpl implements UserService {
             userRoleMapper.insert(userRole);
         }
         return ResultUtils.success("分配权限成功");
+    }
+
+    @Override
+    public List<UserOnlineDTO> selectOnlineUsers(UserOnlineDTO user) {
+        // 因为我们是用redis实现了shiro的session的Dao,而且是采用了shiro+redis这个插件
+        // 所以从spring容器中获取redisSessionDAO来获取session列表.
+        Collection<Session> sessions = redisSessionDAO.getActiveSessions();
+        Iterator<Session> it = sessions.iterator();
+        List<UserOnlineDTO> onlineUserList = Lists.newArrayList();
+        while (it.hasNext()) {
+            // 这是shiro已经存入session的现在直接取就是了
+            Session session = it.next();
+            // 标记为已提出的不加入在线列表
+            if (session.getAttribute("kickout") != null) {
+                continue;
+            }
+            UserOnlineDTO onlineUser = getUserOnlineDTO(session);
+            if (onlineUser != null) {
+                // 用户名搜索
+                if (StringUtils.isNotBlank(user.getUsername())
+                        && !onlineUser.getUsername().contains(user.getUsername())) {
+                    continue;
+                }
+                onlineUserList.add(onlineUser);
+            }
+        }
+        return onlineUserList;
+    }
+
+    @Override
+    public void kickout(String sessionId, String username) {
+        sessionManager.getSession(new DefaultSessionKey(sessionId)).setAttribute("kickout", true);
+        // 读取缓存,找到并从队列中移除
+        Cache<String, Deque<Serializable>> cache = redisCacheManager.getCache(redisCacheManager.getKeyPrefix() +
+                username);
+        Deque<Serializable> deques = cache.get(username);
+        for (Serializable deque : deques) {
+            if (sessionId.equals(deque)) {
+                deques.remove(deque);
+                break;
+            }
+        }
+        cache.put(username, deques);
+    }
+
+    private UserOnlineDTO getUserOnlineDTO(Session session) {
+        // 获取session登录信息。
+        Object obj = session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+        if (obj == null) {
+            return null;
+        }
+        // 确保是SimplePrincipalCollection对象。
+        if (obj instanceof SimplePrincipalCollection) {
+            SimplePrincipalCollection spc = (SimplePrincipalCollection) obj;
+            obj = spc.getPrimaryPrincipal();
+            if (obj instanceof User) {
+                User user = (User) obj;
+                UserOnlineDTO userOnlineDTO = new UserOnlineDTO();
+                userOnlineDTO.setLastAccess(session.getLastAccessTime());
+                userOnlineDTO.setHost(session.getHost());
+                userOnlineDTO.setSessionId(session.getId().toString());
+                userOnlineDTO.setLastLoginTime(user.getLastLoginTime());
+                userOnlineDTO.setTimeout(session.getTimeout());
+                userOnlineDTO.setStartTime(session.getStartTimestamp());
+                userOnlineDTO.setSessionStatus(false);
+                userOnlineDTO.setUsername(user.getUsername());
+                return userOnlineDTO;
+            }
+        }
+        return null;
     }
 
 }

@@ -52,6 +52,14 @@ public class RenderController {
     }
 
     /**
+     * 在线用户入口
+     */
+    @GetMapping("/online/users")
+    public String onlineUsers() {
+        return "onlineUsers/list";
+    }
+
+    /**
      * 数据监控入口
      */
     @GetMapping(value = "/database/monitoring")

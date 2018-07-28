@@ -14,7 +14,9 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.cache.Cache;
 import org.apache.shiro.subject.Subject;
+import org.crazycake.shiro.RedisCacheManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +31,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.Deque;
 import java.util.List;
 
 @Controller
@@ -40,6 +44,8 @@ public class SystemController {
     private UserService userService;
     @Autowired
     private PermissionService permissionService;
+    @Autowired
+    private RedisCacheManager redisCacheManager;
 
     @GetMapping("/login")
     public String login() {
@@ -151,5 +157,38 @@ public class SystemController {
         } else {
             return ResultUtils.error("注册失败，请稍后再试！");
         }
+    }
+
+    /**
+     * 踢出
+     */
+    @GetMapping("/kickout")
+    public String kickout() {
+        return "system/kickout";
+    }
+
+    /**
+     * 登出
+     */
+    @RequestMapping(value = "/logout")
+    @ResponseBody
+    public ResponseDTO logout() {
+        Subject subject = SecurityUtils.getSubject();
+        if (subject != null) {
+            String username = ((User) SecurityUtils.getSubject().getPrincipal()).getUsername();
+            Serializable sessionId = SecurityUtils.getSubject().getSession().getId();
+            Cache<String, Deque<Serializable>> cache = redisCacheManager.getCache(redisCacheManager.getKeyPrefix() +
+                    username);
+            Deque<Serializable> deques = cache.get(username);
+            for (Serializable deque : deques) {
+                if (sessionId.equals(deque)) {
+                    deques.remove(deque);
+                    break;
+                }
+            }
+            cache.put(username, deques);
+            subject.logout();
+        }
+        return ResultUtils.success("退出成功");
     }
 }
