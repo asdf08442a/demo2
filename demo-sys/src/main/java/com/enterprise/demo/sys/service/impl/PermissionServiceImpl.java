@@ -64,7 +64,6 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public int deletePermission(String permissionId) {
-        rolePermissionMapper.delete(new EntityWrapper<RolePermission>().eq("permission_id", permissionId));
         return permissionMapper.delete(new EntityWrapper<Permission>().eq("permission_id", permissionId));
     }
 
@@ -92,5 +91,11 @@ public class PermissionServiceImpl implements PermissionService {
     public int updateByPermissionId(Permission permission) {
         return permissionMapper.update(permission, new EntityWrapper<Permission>()
                 .eq("permission_id", permission.getPermissionId()));
+    }
+
+    @Override
+    public int selectRolePermissionCnt(String permissionId) {
+        return rolePermissionMapper.selectCount(new EntityWrapper<RolePermission>()
+                .eq("permission_id", permissionId));
     }
 }

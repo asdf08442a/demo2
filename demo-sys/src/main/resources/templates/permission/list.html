@@ -200,7 +200,8 @@
                 title : '操作',
                 align : "center",
                 formatter : function(row, index) {
-                    var edit = editFlag=="true"  ?  '<a class="table-btn table-btn-info" href="javascript:void(0)" onclick="editPermission('+row.permissionId+')">编辑</a>' : '';
+                    var permissionId = row.permissionId.toString();
+                    var edit = editFlag == "true" ? '<a class="table-btn table-btn-info" href="javascript:void(0)" onclick="editPermission(' + permissionId + ')">编辑</a>' : '';
                     var del = deleteFlag=="true"  ?  '<a  class="table-btn table-btn-danger" href="javascript:void(0)" onclick="deletePermission('+row.permissionId+')">删除</a>' : '';
                     return edit + del;
                 }
@@ -209,6 +210,7 @@
     };
     /*编辑权限*/
     function editPermission(permissionId) {
+        console.log(permissionId);
         Core.load("#permissionOpenWindow","/permission/edit?permissionId="+permissionId, function(){
             $("#permissionDetailModal").modal("show");
         },2);

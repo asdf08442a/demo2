@@ -58,4 +58,12 @@ public class RenderController {
     public String databaseMonitoring() {
         return "database/monitoring";
     }
+
+    /**
+     * 图标
+     */
+    @GetMapping(value = "/icons")
+    public String getIcons() {
+        return "ui/icons";
+    }
 }

@@ -11,7 +11,7 @@ import java.net.SocketException;
 @Slf4j
 public class IdWorker {
 
-    private static final long twepoch = 1532671831229L;
+    private static final long twepoch = 1532671831229L;// 1288834974657L 1532671831229L
     private static final long workerIdBits = 5L;
     private static final long datacenterIdBits = 5L;
     private static final long maxWorkerId = -1L ^ (-1L << workerIdBits);

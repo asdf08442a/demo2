@@ -90,6 +90,7 @@ CREATE TABLE `role` (
 -- Records of role
 -- ----------------------------
 INSERT INTO `role` (role_id, name, description) VALUES ('1', '超级管理员', '超级管理员');
+INSERT INTO `role` (role_id, name, description) VALUES ('2', '普通用户', '普通用户');
 
 -- ----------------------------
 -- Table structure for `role_permission`
@@ -132,6 +133,7 @@ INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '3');
 INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '301');
 INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '4');
 INSERT INTO `role_permission`(role_id, permission_id) VALUES ('1', '401');
+INSERT INTO `role_permission` (role_id, permission_id) VALUES ('2', '1');
 
 -- ----------------------------
 -- Table structure for `user`

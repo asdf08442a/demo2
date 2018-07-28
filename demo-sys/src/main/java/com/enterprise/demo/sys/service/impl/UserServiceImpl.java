@@ -85,6 +85,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int updateStatusBatch(List<String> userIdsList, Integer status) {
+        if (CoreConst.STATUS_INVALID.equals(status)) {
+            userRoleMapper.delete(new EntityWrapper<UserRole>().in("user_id", userIdsList.toArray()));
+        }
         return userMapper.updateStatusBatch(userIdsList, status);
     }
 

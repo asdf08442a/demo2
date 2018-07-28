@@ -284,14 +284,6 @@
                     field: 'description',
                     title: '角色描述',
                     align: "center"
-                },
-                {
-                    field: 'status',
-                    title: '角色状态',
-                    align: "center",
-                    formatter: function (value, row, index) {
-                        return row.status == '1' ? "有效" : "删除";
-                    }
                 }];
             var roleOptions = {
                 id: "#assignRoleTable",

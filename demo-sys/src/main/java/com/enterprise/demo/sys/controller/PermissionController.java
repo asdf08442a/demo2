@@ -60,6 +60,10 @@ public class PermissionController {
             if (subPermsByPermissionIdCount > 0) {
                 return ResultUtils.error("该资源存在下级资源，无法删除！");
             }
+            int rolePermissionCnt = permissionService.selectRolePermissionCnt(permissionId);
+            if (rolePermissionCnt > 0) {
+                return ResultUtils.error("该资源下还有角色，无法删除！");
+            }
             int a = permissionService.deletePermission(permissionId);
             if (a > 0) {
                 shiroService.updatePermission();

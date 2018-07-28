@@ -26,4 +26,6 @@ public interface PermissionService {
     Permission selectByParentId(String parentId);
 
     int updateByPermissionId(Permission permission);
+
+    int selectRolePermissionCnt(String permissionId);
 }
