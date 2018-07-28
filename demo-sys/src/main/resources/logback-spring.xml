@@ -9,9 +9,10 @@
     <springProperty scope="context" name="spring.application.name" source="spring.application.name"/>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/${spring.application.name}.log</file>
+        <file>${log.path}/${spring.application.name}/${spring.application.name}.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.path}/${spring.application.name}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${log.path}/${spring.application.name}/${spring.application.name}.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
             <maxHistory>90</maxHistory>
         </rollingPolicy>
         <encoder>
