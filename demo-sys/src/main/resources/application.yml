@@ -13,6 +13,7 @@ spring:
       initial-size: 1
       min-idle: 3
       max-active: 20
+      # 获取连接等待超时的时间
       max-wait: 60000
       # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
       time-between-eviction-runs-millis: 60000
@@ -22,18 +23,25 @@ spring:
       test-while-idle: true
       test-on-borrow: false
       test-on-return: false
-      # 打开PSCache，并且指定每个连接上PSCache的大小
-      pool-prepared-statements: true
+      # 打开PSCache，并且指定每个连接上PSCache的大小，Oracle设置为true，mysql可以设置为false
+      pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
       # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
-      filters: stat,wall,slf4j
-      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
-      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-      stat-view-servlet.url-pattern: /druid/*
-      stat-view-servlet.reset-enable: false
-      stat-view-servlet.login-username:
-      stat-view-servlet.login-password:
-      aop-patterns: com.enterprise.demo.*.service.*
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: false
+        wall:
+          config:
+            multi-statement-allow: true
+        slf4j:
+          enabled: true
+      stat-view-servlet:
+        url-pattern: /druid/*
+        reset-enable: false
+        login-username:
+        login-password:
 
   redis:
       host: 192.168.196.128
@@ -68,8 +76,9 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
 
-log:
-  path: /temp/logs
+logging:
+  path: /temp/logs/${spring.application.name}/
+  file: ${spring.application.name}.log
 
 ---
 #dev
@@ -78,8 +87,8 @@ spring:
   datasource:
     druid:
       url: jdbc:mysql://192.168.196.128:3306/sys?useUnicode=true&characterEncoding=utf8
-log:
-  level: debug
+logging:
+  level.com.enterprise: debug
 
 ---
 #test
@@ -87,9 +96,9 @@ spring:
   profiles: test
   datasource:
    druid:
-    url:
-log:
-  level: info
+    url: jdbc:mysql://192.168.196.128:3306/sys?useUnicode=true&characterEncoding=utf8
+logging:
+  level.com.enterprise: info
 
 ---
 #prod
@@ -98,7 +107,7 @@ spring:
   datasource:
    druid:
       url:
-log:
-  level: info
+logging:
+  level.com.enterprise: info
 
 

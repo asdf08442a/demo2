@@ -2,17 +2,13 @@
 
 <configuration>
 
-    <include resource="org/springframework/boot/logging/logback/base.xml"/>
-
-    <springProperty scope="context" name="log.path" source="log.path"/>
-    <springProperty scope="context" name="log.level" source="log.level"/>
-    <springProperty scope="context" name="spring.application.name" source="spring.application.name"/>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/${spring.application.name}/${spring.application.name}.log</file>
+        <file>${LOG_PATH}${LOG_FILE}</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.path}/${spring.application.name}/${spring.application.name}.%d{yyyy-MM-dd}.log
-            </fileNamePattern>
+            <fileNamePattern>${LOG_PATH}${LOG_FILE}.%d{yyyy-MM-dd}.gz</fileNamePattern>
             <maxHistory>90</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -28,9 +24,7 @@
         <appender-ref ref="FILE"/>
     </appender>
 
-    <logger name="com.enterprise" level="${log.level}"/>
-
-    <root>
+    <root level="INFO">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="ASYNC_FILE"/>
     </root>
