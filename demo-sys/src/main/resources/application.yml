@@ -7,8 +7,6 @@ spring:
     active: dev
   datasource:
     druid:
-      username: root
-      password: 123456
       # 初始化大小，最小，最大
       initial-size: 1
       min-idle: 3
@@ -87,6 +85,8 @@ spring:
   datasource:
     druid:
       url: jdbc:mysql://192.168.196.128:3306/sys?useUnicode=true&characterEncoding=utf8
+      username: root
+      password: 123456
 logging:
   level.com.enterprise: debug
 
@@ -97,6 +97,8 @@ spring:
   datasource:
    druid:
     url: jdbc:mysql://192.168.196.128:3306/sys?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
 logging:
   level.com.enterprise: info
 
@@ -107,6 +109,8 @@ spring:
   datasource:
    druid:
       url:
+      username:
+      password:
 logging:
   level.com.enterprise: info
 
