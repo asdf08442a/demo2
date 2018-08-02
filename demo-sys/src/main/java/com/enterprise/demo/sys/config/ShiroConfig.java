@@ -94,6 +94,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/libs/**", "anon");
         filterChainDefinitionMap.put("/favicon.ico", "anon");
         filterChainDefinitionMap.put("/verificationCode", "anon");
+        filterChainDefinitionMap.put("/consumer", "anon");// TODO: 2018/8/2 测试用
         // 自定义加载权限资源关系
         List<Permission> permissionList = permissionService.selectAll();
         for (Permission permission : permissionList) {

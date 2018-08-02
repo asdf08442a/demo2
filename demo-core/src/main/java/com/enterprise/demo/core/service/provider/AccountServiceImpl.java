@@ -7,6 +7,6 @@ import com.enterprise.demo.api.service.AccountService;
 public class AccountServiceImpl implements AccountService {
     @Override
     public String selectAccountById(String accountId) {
-        return null;
+        return String.valueOf(System.currentTimeMillis());
     }
 }

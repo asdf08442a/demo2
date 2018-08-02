@@ -32,7 +32,7 @@
         <druid.version>1.1.10</druid.version>
         <pagehelper-spring-boot-starter.version>1.2.5</pagehelper-spring-boot-starter.version>
         <shiro-spring.version>1.4.0</shiro-spring.version>
-        <thymeleaf-extras-shiro.version>2.0.0</thymeleaf-extras-shiro.version>
+        <thymeleaf-extras-shiro.version>1.2.1</thymeleaf-extras-shiro.version>
         <shiro-redis.version>3.1.0</shiro-redis.version>
         <shiro-redis.version>3.1.0</shiro-redis.version>
         <commons-lang3.version>3.7</commons-lang3.version>
@@ -144,8 +144,20 @@
                 <artifactId>zkclient</artifactId>
                 <version>${zkclient.version}</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <name>Releases</name>
+            <url>http://localhost:8011/repository/maven-releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus</id>
+            <name>Snapshot</name>
+            <url>http://localhost:8011/repository/maven-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>

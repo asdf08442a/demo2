@@ -78,6 +78,15 @@ logging:
   path: /temp/logs/${spring.application.name}/
   file: ${spring.application.name}.log
 
+dubbo:
+  application:
+    name: demo-sys
+  protocol:
+    name: dubbo
+    port:  20880
+  registry:
+   address: zookeeper://192.168.196.128:2181?backup=192.168.196.128:2182,192.168.196.128:2183
+
 ---
 #dev
 spring:
