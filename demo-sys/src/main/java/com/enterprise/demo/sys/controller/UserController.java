@@ -14,6 +14,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+@Api("userController相关的api")
 @Controller
 @RequestMapping("/user")
 @Slf4j
@@ -44,6 +49,13 @@ public class UserController {
     /**
      * 用户列表数据
      */
+    @ApiOperation(value = "查询用户列表", notes = "查询用户列表")
+    @ApiImplicitParams({@ApiImplicitParam(name = "username", value = "username", required = false, dataType =
+            "String", paramType = "query"),
+            @ApiImplicitParam(name = "email", value = "email", required = false, dataType = "String", paramType =
+                    "query"),
+            @ApiImplicitParam(name = "phone", value = "phone", required = false, dataType = "String", paramType =
+                    "query")})
     @PostMapping("/list")
     @ResponseBody
     public PageResultDTO loadUsers(User user, Integer limit, Integer offset) {

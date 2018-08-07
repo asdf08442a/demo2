@@ -59,6 +59,9 @@ spring:
           timeout: 25000
     from: 18330068303@139.com
 
+  thymeleaf:
+    mode: LEGACYHTML5
+
 mybatis-plus:
   mapper-locations: classpath:mapper/*Mapper.xml
   typeAliasesPackage: com.enterprise.demo.sys.entity
