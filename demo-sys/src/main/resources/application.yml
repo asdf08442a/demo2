@@ -42,7 +42,7 @@ spring:
         login-password:
 
   redis:
-      host: 192.168.196.128
+    host: 172.16.107.128
       port: 6379
       database: 0
       password: 123456
@@ -78,7 +78,7 @@ mybatis-plus:
     cache-enabled: false
 
 logging:
-  path: /temp/logs/${spring.application.name}/
+  path: /Users/didi/logs/${spring.application.name}/
   file: ${spring.application.name}.log
 
 dubbo:
@@ -88,7 +88,7 @@ dubbo:
     name: dubbo
     port:  20880
   registry:
-   address: zookeeper://192.168.196.128:2181?backup=192.168.196.128:2182,192.168.196.128:2183
+    address: zookeeper://172.16.107.128:2181?backup=172.16.107.128:2182,172.16.107.128:2183
 
 ---
 #dev
@@ -96,7 +96,7 @@ spring:
   profiles: dev
   datasource:
     druid:
-      url: jdbc:mysql://192.168.196.128:3306/sys?useUnicode=true&characterEncoding=utf8
+      url: jdbc:mysql://172.16.107.128:3306/sys?useUnicode=true&characterEncoding=utf8
       username: root
       password: 123456
 logging:
@@ -108,9 +108,9 @@ spring:
   profiles: test
   datasource:
    druid:
-    url: jdbc:mysql://192.168.196.128:3306/sys?useUnicode=true&characterEncoding=utf8
-    username: root
-    password: 123456
+     url:
+     username:
+     password:
 logging:
   level.com.enterprise: info
 

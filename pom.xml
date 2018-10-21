@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.enterprise.demo</groupId>
-    <artifactId>demo2-0</artifactId>
+    <artifactId>demo2</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -33,7 +33,6 @@
         <pagehelper-spring-boot-starter.version>1.2.5</pagehelper-spring-boot-starter.version>
         <shiro-spring.version>1.4.0</shiro-spring.version>
         <thymeleaf-extras-shiro.version>1.2.1</thymeleaf-extras-shiro.version>
-        <shiro-redis.version>3.1.0</shiro-redis.version>
         <shiro-redis.version>3.1.0</shiro-redis.version>
         <commons-lang3.version>3.7</commons-lang3.version>
         <kaptcha.version>2.3.2</kaptcha.version>
