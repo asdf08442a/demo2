@@ -36,14 +36,14 @@
 
   //Create the tab button
   var tab_button = $("<li />", {"class": "active"})
-      .html("<a href='#control-sidebar-theme-demo-options-tab' data-toggle='tab'>"
+  .html("<a href='#control-sidebar-theme-demo-options-tab' data-toggle='tab'>"
       + "<i class='fa fa-wrench'></i>"
       + "</a>");
 
   //Add the tab button to the right sidebar tabs
   $("[href='#control-sidebar-home-tab']")
-      .parent()
-      .before(tab_button);
+  .parent()
+  .before(tab_button);
 
   //Create the menu
   var demo_settings = $("<div />");
@@ -53,14 +53,14 @@
       "<h4 class='control-sidebar-heading'>"
       + "布局选项"
       + "</h4>"
-        //Fixed layout 打开需引入jquery.slimscroll.min.js
-/*      + "<div class='form-group'>"
-      + "<label class='control-sidebar-subheading'>"
-      + "<input type='checkbox' data-layout='fixed' class='pull-right'/> "
-      + "固定布局"
-      + "</label>"
-      + "<p>开启固定布局。不能同时使用固定和盒状布局。</p>"
-      + "</div>"*/
+      //Fixed layout 打开需引入jquery.slimscroll.min.js
+      /*      + "<div class='form-group'>"
+            + "<label class='control-sidebar-subheading'>"
+            + "<input type='checkbox' data-layout='fixed' class='pull-right'/> "
+            + "固定布局"
+            + "</label>"
+            + "<p>开启固定布局。不能同时使用固定和盒状布局。</p>"
+            + "</div>"*/
       + "<div class='form-group'>"
       + "<label class='control-sidebar-subheading'>"
       + "<input id='fixCheckBox' type='checkbox' checked  class='pull-right'/> "
@@ -68,7 +68,7 @@
       + "</label>"
       + "<p>开启固定布局。不能同时使用固定和盒状布局。</p>"
       + "</div>"
-        //Boxed layout
+      //Boxed layout
       + "<div class='form-group'>"
       + "<label class='control-sidebar-subheading'>"
       + "<input id='layoutBox' type='checkbox' class='pull-right'/> "
@@ -82,7 +82,8 @@
   //Dark sidebar skins
   var skin_blue =
       $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' id='skin-blue' data-skin='skin-blue' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
+      .append(
+          "<a href='javascript:void(0);' id='skin-blue' data-skin='skin-blue' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
           + "<div><span style='display:block; width: 20%; float: left; height: 7px; background: #367fa9;'></span><span class='bg-light-blue' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
           + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #222d32;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
           + "</a>"
@@ -90,7 +91,8 @@
   skins_list.append(skin_blue);
   var skin_black =
       $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-black' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
+      .append(
+          "<a href='javascript:void(0);' data-skin='skin-black' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
           + "<div style='box-shadow: 0 0 2px rgba(0,0,0,0.1)' class='clearfix'><span style='display:block; width: 20%; float: left; height: 7px; background: #fefefe;'></span><span style='display:block; width: 80%; float: left; height: 7px; background: #fefefe;'></span></div>"
           + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #222;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
           + "</a>"
@@ -98,7 +100,8 @@
   skins_list.append(skin_black);
   var skin_purple =
       $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-purple' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
+      .append(
+          "<a href='javascript:void(0);' data-skin='skin-purple' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
           + "<div><span style='display:block; width: 20%; float: left; height: 7px;' class='bg-purple-active'></span><span class='bg-purple' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
           + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #222d32;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
           + "</a>"
@@ -106,7 +109,8 @@
   skins_list.append(skin_purple);
   var skin_green =
       $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-green' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
+      .append(
+          "<a href='javascript:void(0);' data-skin='skin-green' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
           + "<div><span style='display:block; width: 20%; float: left; height: 7px;' class='bg-green-active'></span><span class='bg-green' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
           + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #222d32;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
           + "</a>"
@@ -114,7 +118,8 @@
   skins_list.append(skin_green);
   var skin_red =
       $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-red' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
+      .append(
+          "<a href='javascript:void(0);' data-skin='skin-red' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
           + "<div><span style='display:block; width: 20%; float: left; height: 7px;' class='bg-red-active'></span><span class='bg-red' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
           + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #222d32;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
           + "</a>"
@@ -122,7 +127,8 @@
   skins_list.append(skin_red);
   var skin_yellow =
       $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-yellow' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
+      .append(
+          "<a href='javascript:void(0);' data-skin='skin-yellow' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
           + "<div><span style='display:block; width: 20%; float: left; height: 7px;' class='bg-yellow-active'></span><span class='bg-yellow' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
           + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #222d32;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
           + "</a>"
@@ -132,7 +138,8 @@
   //Light sidebar skins
   var skin_blue_light =
       $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-blue-light' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
+      .append(
+          "<a href='javascript:void(0);' data-skin='skin-blue-light' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
           + "<div><span style='display:block; width: 20%; float: left; height: 7px; background: #367fa9;'></span><span class='bg-light-blue' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
           + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #f9fafc;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
           + "</a>"
@@ -140,7 +147,8 @@
   skins_list.append(skin_blue_light);
   var skin_black_light =
       $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-black-light' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
+      .append(
+          "<a href='javascript:void(0);' data-skin='skin-black-light' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
           + "<div style='box-shadow: 0 0 2px rgba(0,0,0,0.1)' class='clearfix'><span style='display:block; width: 20%; float: left; height: 7px; background: #fefefe;'></span><span style='display:block; width: 80%; float: left; height: 7px; background: #fefefe;'></span></div>"
           + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #f9fafc;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
           + "</a>"
@@ -148,7 +156,8 @@
   skins_list.append(skin_black_light);
   var skin_purple_light =
       $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-purple-light' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
+      .append(
+          "<a href='javascript:void(0);' data-skin='skin-purple-light' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
           + "<div><span style='display:block; width: 20%; float: left; height: 7px;' class='bg-purple-active'></span><span class='bg-purple' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
           + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #f9fafc;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
           + "</a>"
@@ -156,7 +165,8 @@
   skins_list.append(skin_purple_light);
   var skin_green_light =
       $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-green-light' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
+      .append(
+          "<a href='javascript:void(0);' data-skin='skin-green-light' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
           + "<div><span style='display:block; width: 20%; float: left; height: 7px;' class='bg-green-active'></span><span class='bg-green' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
           + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #f9fafc;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
           + "</a>"
@@ -164,7 +174,8 @@
   skins_list.append(skin_green_light);
   var skin_red_light =
       $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-red-light' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
+      .append(
+          "<a href='javascript:void(0);' data-skin='skin-red-light' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
           + "<div><span style='display:block; width: 20%; float: left; height: 7px;' class='bg-red-active'></span><span class='bg-red' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
           + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #f9fafc;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
           + "</a>"
@@ -172,7 +183,8 @@
   skins_list.append(skin_red_light);
   var skin_yellow_light =
       $("<li />", {style: "float:left; width: 33.33333%; padding: 5px;"})
-          .append("<a href='javascript:void(0);' data-skin='skin-yellow-light' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
+      .append(
+          "<a href='javascript:void(0);' data-skin='skin-yellow-light' style='display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)' class='clearfix full-opacity-hover'>"
           + "<div><span style='display:block; width: 20%; float: left; height: 7px;' class='bg-yellow-active'></span><span class='bg-yellow' style='display:block; width: 80%; float: left; height: 7px;'></span></div>"
           + "<div><span style='display:block; width: 20%; float: left; height: 20px; background: #f9fafc;'></span><span style='display:block; width: 80%; float: left; height: 20px; background: #f4f5f7;'></span></div>"
           + "</a>"
@@ -197,8 +209,9 @@
     $("body").toggleClass(cls);
     AdminLTE.layout.fixSidebar();
     //Fix the problem with right sidebar and layout boxed
-    if (cls == "layout-boxed")
+    if (cls == "layout-boxed") {
       AdminLTE.controlSidebar._fix($(".control-sidebar-bg"));
+    }
     if ($('body').hasClass('fixed') && cls == 'fixed') {
       AdminLTE.pushMenu.expandOnHover();
       AdminLTE.layout.activate();
@@ -233,7 +246,8 @@
     if (typeof (Storage) !== "undefined") {
       localStorage.setItem(name, val);
     } else {
-      window.alert('Please use a modern browser to properly view this template!');
+      window.alert(
+          'Please use a modern browser to properly view this template!');
     }
   }
 
@@ -247,7 +261,8 @@
     if (typeof (Storage) !== "undefined") {
       return localStorage.getItem(name);
     } else {
-      window.alert('Please use a modern browser to properly view this template!');
+      window.alert(
+          'Please use a modern browser to properly view this template!');
     }
   }
 
@@ -258,13 +273,15 @@
    */
   function setup() {
     var tmp = get('skin');
-    if (tmp && $.inArray(tmp, my_skins))
+    if (tmp && $.inArray(tmp, my_skins)) {
       change_skin(tmp);
+    }
 
     //Add the change skin listener
     $("[data-skin]").on('click', function (e) {
-      if($(this).hasClass('knob'))
+      if ($(this).hasClass('knob')) {
         return;
+      }
       e.preventDefault();
       change_skin($(this).data('skin'));
     });
@@ -278,8 +295,9 @@
       change_layout($(this).data('controlsidebar'));
       var slide = !AdminLTE.options.controlSidebarOptions.slide;
       AdminLTE.options.controlSidebarOptions.slide = slide;
-      if (!slide)
+      if (!slide) {
         $('.control-sidebar').removeClass('control-sidebar-open');
+      }
     });
 
     $("[data-sidebarskin='toggle']").on('click', function () {
@@ -296,8 +314,9 @@
     $("[data-enable='expandOnHover']").on('click', function () {
       $(this).attr('disabled', true);
       AdminLTE.pushMenu.expandOnHover();
-      if (!$('body').hasClass('sidebar-collapse'))
+      if (!$('body').hasClass('sidebar-collapse')) {
         $("[data-layout='sidebar-collapse']").click();
+      }
     });
 
     // Reset options

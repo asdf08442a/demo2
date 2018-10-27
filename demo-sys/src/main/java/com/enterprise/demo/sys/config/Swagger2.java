@@ -20,23 +20,24 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class Swagger2 {
-    @Value("${spring.application.name}")
-    private String title;
 
-    @Bean
-    public Docket createRestApi() {
-        ApiInfo apiInfo = new ApiInfoBuilder()
-                .title(title)
-                .description("管理后台接口文档")
-                .termsOfServiceUrl("https://github.com/asdf08442a/demo2-0")
-                .contact(new Contact("jinzg", "", ""))
-                .version("1.0")
-                .build();
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.enterprise.demo.sys"))
-                .paths(PathSelectors.any())
-                .build();
-    }
+  @Value("${spring.application.name}")
+  private String title;
+
+  @Bean
+  public Docket createRestApi() {
+    ApiInfo apiInfo = new ApiInfoBuilder()
+        .title(title)
+        .description("管理后台接口文档")
+        .termsOfServiceUrl("https://github.com/asdf08442a/demo2-0")
+        .contact(new Contact("jinzg", "", ""))
+        .version("1.0")
+        .build();
+    return new Docket(DocumentationType.SWAGGER_2)
+        .apiInfo(apiInfo)
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("com.enterprise.demo.sys"))
+        .paths(PathSelectors.any())
+        .build();
+  }
 }

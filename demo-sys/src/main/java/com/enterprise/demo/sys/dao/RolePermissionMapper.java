@@ -2,9 +2,8 @@ package com.enterprise.demo.sys.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.enterprise.demo.sys.entity.RolePermission;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.Set;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -13,7 +12,7 @@ import java.util.Set;
  */
 public interface RolePermissionMapper extends BaseMapper<RolePermission> {
 
-    Set<String> selectPermissionIdsByRoleId(@Param("roleId") String roleId);
+  Set<String> selectPermissionIdsByRoleId(@Param("roleId") String roleId);
 
-    Set<String> selectPermissionIdsByRoleIds(@Param("roleIds") Set<String> roleIds);
+  Set<String> selectPermissionIdsByRoleIds(@Param("roleIds") Set<String> roleIds);
 }

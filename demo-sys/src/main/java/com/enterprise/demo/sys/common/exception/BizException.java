@@ -5,11 +5,11 @@ package com.enterprise.demo.sys.common.exception;
  **/
 public class BizException extends RuntimeException {
 
-    /**
-     * 自定义错误信息
-     */
-    public BizException(String message) {
-        super(message);
-    }
+  /**
+   * 自定义错误信息
+   */
+  public BizException(String message) {
+    super(message);
+  }
 
 }

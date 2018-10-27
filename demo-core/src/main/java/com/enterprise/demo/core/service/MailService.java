@@ -1,5 +1,9 @@
 package com.enterprise.demo.core.service;
 
+import java.io.File;
+import javax.annotation.Resource;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
@@ -7,11 +11,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import java.io.File;
 
 /**
  * 邮件发送
@@ -23,35 +22,35 @@ import java.io.File;
 @Service
 public class MailService {
 
-    @Resource
-    private JavaMailSender javaMailSender;
-    @Value("${spring.mail.from}")
-    private String fromMail;
+  @Resource
+  private JavaMailSender javaMailSender;
+  @Value("${spring.mail.from}")
+  private String fromMail;
 
-    public void sendSimpleMail(String toMail, String subject, String content) {
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom(fromMail);
-        simpleMailMessage.setTo(toMail);
-        simpleMailMessage.setSubject(subject);
-        simpleMailMessage.setText(content);
-        javaMailSender.send(simpleMailMessage);
+  public void sendSimpleMail(String toMail, String subject, String content) {
+    SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+    simpleMailMessage.setFrom(fromMail);
+    simpleMailMessage.setTo(toMail);
+    simpleMailMessage.setSubject(subject);
+    simpleMailMessage.setText(content);
+    javaMailSender.send(simpleMailMessage);
+  }
+
+  public void sendAttachmentsMail(String toMail, String subject, String content, File file) {
+    MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+    try {
+      MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+      helper.setFrom(fromMail);
+      helper.setTo(toMail);
+      helper.setSubject(subject);
+      helper.setText(content);
+
+      FileSystemResource fileSystemResource = new FileSystemResource(file);
+      helper.addAttachment(file.getName(), fileSystemResource);
+    } catch (MessagingException e) {
+      log.error("send mail exception：{}", e);
     }
-
-    public void sendAttachmentsMail(String toMail, String subject, String content, File file) {
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-        try {
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-            helper.setFrom(fromMail);
-            helper.setTo(toMail);
-            helper.setSubject(subject);
-            helper.setText(content);
-
-            FileSystemResource fileSystemResource = new FileSystemResource(file);
-            helper.addAttachment(file.getName(), fileSystemResource);
-        } catch (MessagingException e) {
-            log.error("send mail exception：{}", e);
-        }
-        javaMailSender.send(mimeMessage);
-    }
+    javaMailSender.send(mimeMessage);
+  }
 
 }

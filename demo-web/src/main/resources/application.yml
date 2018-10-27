@@ -43,10 +43,10 @@ spring:
 
   redis:
     host: 172.16.107.128
-      port: 6379
-      database: 0
-      password: 123456
-      timeout: 2000
+    port: 6379
+    database: 0
+    password: 123456
+    timeout: 2000
 
   mail:
     host: smtp.exmail.qq.com
@@ -106,10 +106,10 @@ logging:
 spring:
   profiles: test
   datasource:
-   druid:
-     url:
-     username:
-     password:
+    druid:
+      url:
+      username:
+      password:
 logging:
   level.com.enterprise: info
 
@@ -118,7 +118,7 @@ logging:
 spring:
   profiles: prod
   datasource:
-   druid:
+    druid:
       url:
       username:
       password:

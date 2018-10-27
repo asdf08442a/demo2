@@ -1,170 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.enterprise.demo</groupId>
-    <artifactId>demo2</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+  <groupId>com.enterprise.demo</groupId>
+  <artifactId>demo2</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-    <modules>
-        <module>demo-web</module>
-        <module>demo-core</module>
-        <module>demo-api</module>
-        <module>demo-sys</module>
-    </modules>
+  <modules>
+    <module>demo-web</module>
+    <module>demo-core</module>
+    <module>demo-api</module>
+    <module>demo-sys</module>
+  </modules>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.9.RELEASE</version>
-        <relativePath/> <!-- lookup parent from dao -->
-    </parent>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.0.2.RELEASE</version>
+    <relativePath/> <!-- lookup parent from dao -->
+  </parent>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <springfox-swagger.version>2.7.0</springfox-swagger.version>
-        <mybatis-plus-boot-starter.version>2.1.9</mybatis-plus-boot-starter.version>
-        <druid.version>1.1.10</druid.version>
-        <pagehelper-spring-boot-starter.version>1.2.5</pagehelper-spring-boot-starter.version>
-        <shiro-spring.version>1.4.0</shiro-spring.version>
-        <thymeleaf-extras-shiro.version>1.2.1</thymeleaf-extras-shiro.version>
-        <shiro-redis.version>3.1.0</shiro-redis.version>
-        <commons-lang3.version>3.7</commons-lang3.version>
-        <kaptcha.version>2.3.2</kaptcha.version>
-        <fastjson.version>1.2.47</fastjson.version>
-        <dubbo-spring-boot-starter.version>0.1.0</dubbo-spring-boot-starter.version>
-        <zkclient.version>0.10</zkclient.version>
-        <nekohtml.version>1.9.22</nekohtml.version>
-    </properties>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.8</java.version>
+    <springfox-swagger.version>2.7.0</springfox-swagger.version>
+    <mybatis-plus-boot-starter.version>2.1.9</mybatis-plus-boot-starter.version>
+    <druid.version>1.1.10</druid.version>
+    <pagehelper-spring-boot-starter.version>1.2.5</pagehelper-spring-boot-starter.version>
+    <shiro-spring.version>1.4.0</shiro-spring.version>
+    <thymeleaf-extras-shiro.version>2.0.0</thymeleaf-extras-shiro.version>
+    <shiro-redis.version>3.1.0</shiro-redis.version>
+    <commons-lang3.version>3.7</commons-lang3.version>
+    <kaptcha.version>2.3.2</kaptcha.version>
+    <fastjson.version>1.2.47</fastjson.version>
+    <dubbo-spring-boot-starter.version>0.1.0</dubbo-spring-boot-starter.version>
+    <zkclient.version>0.10</zkclient.version>
+    <nekohtml.version>1.9.22</nekohtml.version>
+  </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.enterprise.demo</groupId>
-                <artifactId>demo-web</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.enterprise.demo</groupId>
+        <artifactId>demo-web</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+      </dependency>
 
-            <dependency>
-                <groupId>com.enterprise.demo</groupId>
-                <artifactId>demo-core</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
+      <dependency>
+        <groupId>com.enterprise.demo</groupId>
+        <artifactId>demo-core</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+      </dependency>
 
-            <dependency>
-                <groupId>com.enterprise.demo</groupId>
-                <artifactId>demo-api</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
+      <dependency>
+        <groupId>com.enterprise.demo</groupId>
+        <artifactId>demo-api</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+      </dependency>
 
-            <!-- swagger -->
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${springfox-swagger.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger-ui</artifactId>
-                <version>${springfox-swagger.version}</version>
-            </dependency>
+      <!-- swagger -->
+      <dependency>
+        <groupId>io.springfox</groupId>
+        <artifactId>springfox-swagger2</artifactId>
+        <version>${springfox-swagger.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.springfox</groupId>
+        <artifactId>springfox-swagger-ui</artifactId>
+        <version>${springfox-swagger.version}</version>
+      </dependency>
 
-            <!-- database -->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus-boot-starter.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${druid.version}</version>
-            </dependency>
+      <!-- database -->
+      <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-boot-starter</artifactId>
+        <version>${mybatis-plus-boot-starter.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid-spring-boot-starter</artifactId>
+        <version>${druid.version}</version>
+      </dependency>
 
-            <!-- pagehelper -->
-            <dependency>
-                <groupId>com.github.pagehelper</groupId>
-                <artifactId>pagehelper-spring-boot-starter</artifactId>
-                <version>${pagehelper-spring-boot-starter.version}</version>
-            </dependency>
+      <!-- pagehelper -->
+      <dependency>
+        <groupId>com.github.pagehelper</groupId>
+        <artifactId>pagehelper-spring-boot-starter</artifactId>
+        <version>${pagehelper-spring-boot-starter.version}</version>
+      </dependency>
 
-            <!-- shiro -->
-            <dependency>
-                <groupId>org.apache.shiro</groupId>
-                <artifactId>shiro-spring</artifactId>
-                <version>${shiro-spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.theborakompanioni</groupId>
-                <artifactId>thymeleaf-extras-shiro</artifactId>
-                <version>${thymeleaf-extras-shiro.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.crazycake</groupId>
-                <artifactId>shiro-redis</artifactId>
-                <version>${shiro-redis.version}</version>
-            </dependency>
+      <!-- shiro -->
+      <dependency>
+        <groupId>org.apache.shiro</groupId>
+        <artifactId>shiro-spring</artifactId>
+        <version>${shiro-spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.theborakompanioni</groupId>
+        <artifactId>thymeleaf-extras-shiro</artifactId>
+        <version>${thymeleaf-extras-shiro.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.crazycake</groupId>
+        <artifactId>shiro-redis</artifactId>
+        <version>${shiro-redis.version}</version>
+      </dependency>
 
-            <!-- common -->
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>${commons-lang3.version}</version>
-            </dependency>
+      <!-- common -->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons-lang3.version}</version>
+      </dependency>
 
-            <!-- kaptcha -->
-            <dependency>
-                <groupId>com.github.penggle</groupId>
-                <artifactId>kaptcha</artifactId>
-                <version>${kaptcha.version}</version>
-            </dependency>
+      <!-- kaptcha -->
+      <dependency>
+        <groupId>com.github.penggle</groupId>
+        <artifactId>kaptcha</artifactId>
+        <version>${kaptcha.version}</version>
+      </dependency>
 
-            <!-- fastjson -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>${fastjson.version}</version>
-            </dependency>
+      <!-- fastjson -->
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>${fastjson.version}</version>
+      </dependency>
 
-            <!-- dubbo -->
-            <dependency>
-                <groupId>com.alibaba.boot</groupId>
-                <artifactId>dubbo-spring-boot-starter</artifactId>
-                <version>${dubbo-spring-boot-starter.version}</version>
-            </dependency>
+      <!-- dubbo -->
+      <dependency>
+        <groupId>com.alibaba.boot</groupId>
+        <artifactId>dubbo-spring-boot-starter</artifactId>
+        <version>${dubbo-spring-boot-starter.version}</version>
+      </dependency>
 
-            <!-- zkclient -->
-            <dependency>
-                <groupId>com.101tec</groupId>
-                <artifactId>zkclient</artifactId>
-                <version>${zkclient.version}</version>
-            </dependency>
+      <!-- zkclient -->
+      <dependency>
+        <groupId>com.101tec</groupId>
+        <artifactId>zkclient</artifactId>
+        <version>${zkclient.version}</version>
+      </dependency>
 
-            <!-- nekohtml -->
-            <dependency>
-                <groupId>net.sourceforge.nekohtml</groupId>
-                <artifactId>nekohtml</artifactId>
-                <version>${nekohtml.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+      <!-- nekohtml -->
+      <dependency>
+        <groupId>net.sourceforge.nekohtml</groupId>
+        <artifactId>nekohtml</artifactId>
+        <version>${nekohtml.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
-    <distributionManagement>
-        <repository>
-            <id>nexus</id>
-            <name>Releases</name>
-            <url>http://192.168.196.128:8011/repository/maven-releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>nexus</id>
-            <name>Snapshot</name>
-            <url>http://192.168.196.128:8011/repository/maven-snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
+  <distributionManagement>
+    <repository>
+      <id>nexus</id>
+      <name>Releases</name>
+      <url>http://192.168.196.128:8011/repository/maven-releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>nexus</id>
+      <name>Snapshot</name>
+      <url>http://192.168.196.128:8011/repository/maven-snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
 
 </project>

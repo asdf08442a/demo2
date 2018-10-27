@@ -3,30 +3,29 @@ package com.enterprise.demo.sys.service;
 import com.enterprise.demo.sys.dto.UserOnlineDTO;
 import com.enterprise.demo.sys.dto.base.ResponseDTO;
 import com.enterprise.demo.sys.entity.User;
-
 import java.util.List;
 
 public interface UserService {
 
-    int selectRoleUserCnt(String roleId);
+  int selectRoleUserCnt(String roleId);
 
-    User selectByUsername(String username);
+  User selectByUsername(String username);
 
-    void updateLastLoginTime(User principal);
+  void updateLastLoginTime(User principal);
 
-    User selectByUserId(String userId);
+  User selectByUserId(String userId);
 
-    int updateByUserId(User user);
+  int updateByUserId(User user);
 
-    List<User> findUsers(User user);
+  List<User> findUsers(User user);
 
-    int insert(User user);
+  int insert(User user);
 
-    int updateStatusBatch(List<String> userIdsList, Integer status);
+  int updateStatusBatch(List<String> userIdsList, Integer status);
 
-    ResponseDTO addAssignRole(String userId, List<String> roleIds);
+  ResponseDTO addAssignRole(String userId, List<String> roleIds);
 
-    List<UserOnlineDTO> selectOnlineUsers(UserOnlineDTO user);
+  List<UserOnlineDTO> selectOnlineUsers(UserOnlineDTO user);
 
-    void kickout(String sessionId, String username);
+  void kickout(String sessionId, String username);
 }
